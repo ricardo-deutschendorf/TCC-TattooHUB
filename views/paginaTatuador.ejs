@@ -1,0 +1,38 @@
+<div class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-10 col-12">
+                <h1>
+                    <span class="d-block text-primary">Escolha seu</span>
+                    <span class="d-block text-dark">Tatuador</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section  class="featured-product section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+            </div>
+
+            <div class="col-12">
+                <h2 class="mb-5">Tatuagens</h2>
+            </div>
+            <% for (let i = 0; i < tatuagens.length; i++) { %>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="/imagens/tatuagens/<%= tatuagens[i].imagem %>" class="card-img-top"
+                        alt="Imagem da tatuagem">
+                    <div class="card-body">
+                        <h5 class="card-title">Preço: R$ <%= tatuagens[i].preco %></h5>
+                        <p class="card-text"><%= tatuagens[i].descricao %></p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</section>

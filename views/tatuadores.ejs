@@ -1,0 +1,62 @@
+<div class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-10 col-12">
+                <h1>
+                    <span class="d-block text-primary">Tatuadores</span>
+                    <span class="d-block text-dark">Recentes</span>
+                </h1>
+            </div>
+            <img src="//images/carrosel/tatuage4.jpg" class="img-fluid" alt="">
+        </div>
+    </div>
+</div>
+
+<section class="featured-product section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+            </div>
+
+            <!-- Card 1 -->
+            <% for (let i=0; i < tatuadores.length; i++) { %>
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+                    <div class="card2" style="width: 18rem;">
+                        <div class="conteiner">
+                            <form method="POST" action="/tatuador/apagar/<%=tatuadores[i].id%>">
+                                <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
+                                <img src="/imagens/<%=tatuadores[i].imagem %>" class="card-img-top shadowfoda"
+                                    alt="...">
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= tatuadores[i].nome_artistico%>
+                            </h5>
+                            <p class="card-text">
+                                <%= tatuadores[i].estudio%>
+                            </p>
+
+                        </div>
+                        <div class="quadrado">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item estilotatuad">
+                                    <p>Estilo de arte:</p>
+                                    <%= tatuadores[i].estilo%>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body alinharbotaocard">
+                            <button href="/tatuador/<%=tatuadores[i].id%>" class="card-link botaozika">Perfil</button>
+                            <form method="POST" action="/chat">
+                                <input type="hidden" name="idUser" value="<%=tatuadores[i].id%>%>" />
+                                <button class="botaozika">Chat</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>
+</section>

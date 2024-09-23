@@ -1,0 +1,156 @@
+
+.card2 {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative; /* Garante que o card seja o contexto do botão */
+}
+
+.card2:hover {
+    transform: scale(1.05);
+}
+
+
+#profile-image {
+    width: 40px; /* Ajuste o tamanho conforme necessário */
+    height: 40px;
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover; /* Faz a imagem cobrir o espaço */
+}
+
+.botaozika {
+    display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #FF4400;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+}
+
+.botaozika:hover {
+    background-color: #fff;
+    color: #FF4400;
+    border: 2px solid #FF4400;
+    box-shadow:  5px, 5px, 0px #FF4400;
+}
+
+
+.alinharbotaocard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.estilotatuad {
+    border-radius: 15px; /* Bordas arredondadas */
+    text-align: center;
+    font-size: 22px;
+    font-family: serif;
+    border: 1px solid #ccc; /* Borda opcional */
+}
+.quadrado-container {
+    height: 100vh; /* Ocupa a altura total da tela */
+    padding: 20px; /* Espaço interno para não encostar nas bordas */
+}
+
+.quadrado {
+    border-radius: 15px; /* Bordas arredondadas */
+    border: 1px solid #ccc; /* Borda opcional */
+}
+
+.titulopika {
+    font-size: 60px;
+    font-family: sans-serif;
+    text-decoration:underline;
+}
+
+.shadowfoda {
+    width: 100%; /* Largura da imagem */
+    height: 150px; /* Altura fixa da imagem */
+    object-fit: cover; /* Corta a imagem mantendo a proporção */
+    border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
+    overflow: hidden;
+}
+
+.botaomaiszika {
+    background-color: red;
+    position: absolute;
+    top: 10px; /* Mantém o botão no topo */
+    right: 10px; /* Mantém o botão à direita */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10; /* Garante que o botão fique acima de outros elementos */
+}
+
+.conteiner {
+    position: relative; /* Torna o contêiner referência para o posicionamento absoluto */
+}
+
+.centralized {
+    display: flex;               /* Usar Flexbox para layout */
+    justify-content: center;     /* Centraliza horizontalmente */
+    align-items: center;         /* Centraliza verticalmente */
+    height: 100vh;              /* Ocupa toda a altura da tela */
+    background-color: #f0f0f0;  /* Cor de fundo da página */
+}
+
+.content {
+    background-color: #ffffff;       /* Cor de fundo da div */
+    padding: 20px;                   /* Espaçamento interno */
+    border-radius: 10px;             /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    text-align: left;            /* Centraliza o texto dentro da div */
+}
+.small-div {
+    display: flex;                  /* Usar Flexbox para layout */
+    align-items: center;            /* Alinha verticalmente os itens ao centro */
+    width: 300px;                   /* Define uma largura fixa */
+    padding: 10px;                  /* Adiciona espaçamento interno */
+    background-color: #e0e0e0;      /* Cor de fundo para visibilidade */
+    border: 1px solid #ccc;         /* Borda opcional para melhor visibilidade */
+    border-radius: 5px;             /* Bordas arredondadas */
+}
+
+.imgdaora {
+    width: 50px;                    /* Define uma largura fixa */
+    height: 40px;                   /* Define uma altura fixa */
+    background-color: #e0e0e0;      /* Cor de fundo para visibilidade */
+    border: 1px solid #ccc;         /* Borda opcional para melhor visibilidade */
+    border-radius: 20px;            /* Bordas arredondadas */
+    margin-right: 10px;             /* Espaço entre a imagem e o texto */
+}
+
+.chataqui{
+    background-color: #FAF3E0;
+}
+
+.chatacima{
+    font-size: 20px;
+    font-family: sans-serif;
+    text-decoration:underline;
+}
+
+.left-aligned {
+    display: flex;                /* Usar Flexbox para layout */
+    justify-content: flex-start;  /* Alinha o conteúdo à esquerda */
+    align-items: flex-start;      /* Alinha os itens no topo */
+    
+}
+.left-aligned2 {
+    flex-direction: column;
+} 
+
+.fotodolado {
+    width: 80px; /* Ajuste o tamanho conforme necessário */
+    height: 80px; /* Mantém a proporção da imagem */
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover; /* Faz a imagem cobrir o espaço da caixa */
+    border: 2px solid #ccc; /* Borda opcional */
+  }

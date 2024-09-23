@@ -1,0 +1,130 @@
+<section class="preloader">
+    <div class="spinner">
+        <span class="sk-inner-circle"></span>
+    </div>
+</section>
+
+
+<section class="sign-in-form section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 mx-auto col-12">
+
+                <h1 class="hero-title text-center mb-5">Registre-se</h1>
+
+                <div class="social-login d-flex flex-column w-50 m-auto">
+
+
+
+                    <div class="div-separator w-50 m-auto my-5"><span></span></div>
+
+                    <div class="row">
+                        <div class="col-lg-8 col-11 mx-auto">
+                            <form role="form" method="post" enctype="multipart/form-data">
+
+                                <div class="form-floating">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" name="imagem" class="form-label">Escolha sua foto de
+                                        perfil:</label>
+                                    <input class="form-control" type="file" name="imagem" id="foto" required>
+                                </div>
+                                <br>
+
+                                <div class="form-floating">
+                                    <input type="text" name="nome" id="name" class="form-control" placeholder="Nome"
+                                        required>
+
+                                    <label for="name">Nome</label>
+                                </div>
+                                <div class="form-floating my-4">
+                                    <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*"
+                                        class="form-control" placeholder="Email address" required>
+
+                                    <label for="email">Email</label>
+                                </div>
+
+                                <div class="form-floating my-4">
+                                    <input type="password" name="senha" id="password" pattern="[0-9a-zA-Z]{4,10}"
+                                        class="form-control" placeholder="Password" required>
+
+                                    <label for="password">Senha</label>
+                                </div>
+
+                                <div class="form-floating my-4">
+                                    <input type="password" name="rsenha" id="confirm_password"
+                                        pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="Password"
+                                        required>
+
+                                    <label for="confirm_password">Confirmar senha</label>
+                                </div>
+
+                                <div class="form-data my-4">
+                                    <p>Selecione o tipo de usuário:</p>
+                                    <input type="radio" id="cliente" name="tipo" value="cliente">
+                                    <label for="cliente">Cliente</label><br>
+                                    <input type="radio" id="tatuador" name="tipo" value="tatuador">
+                                    <label for="tatuador">Tatuador</label><br>
+                                </div>
+
+                                <!-- Campos adicionais escondidos inicialmente -->
+                                <div id="extra-fields" style="display:none;">
+                                    <div class="form-floating my-4">
+                                        <input type="text" name="estudio" id="nome_estudio" class="form-control"
+                                            placeholder="Nome do Estúdio">
+                                        <label for="estudio">Nome do Estúdio</label>
+                                    </div>
+
+                                    <div class="form-floating my-4">
+                                        <input type="text" name="nome_artistico" id="nome_artistico"
+                                            class="form-control" placeholder="Nome Artístico">
+                                        <label for="nome_artistico">Nome Artístico</label>
+                                    </div>
+
+                                    <div class="form-floating my-4">
+                                        <input type="text" name="estilo" id="estilo" class="form-control"
+                                            placeholder="Estilo">
+                                        <label for="estilo">Estilo</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
+                                    Criar conta
+                                </button>
+
+                                <p class="text-center">Já tem uma conta? Por favor <a href="/login">faça o
+                                        login</a></p>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+</section>
+
+<script>
+    // Função para mostrar ou esconder os campos adicionais
+    document.addEventListener('DOMContentLoaded', function () {
+        const tatuadorRadio = document.getElementById('tatuador');
+        const clienteRadio = document.getElementById('cliente');
+        const extraFields = document.getElementById('extra-fields');
+
+        // Verificar mudança nos radio buttons
+        tatuadorRadio.addEventListener('change', function () {
+            if (tatuadorRadio.checked) {
+                extraFields.style.display = 'block'; // Mostrar campos
+            }
+        });
+
+        clienteRadio.addEventListener('change', function () {
+            if (clienteRadio.checked) {
+                extraFields.style.display = 'none'; // Esconder campos
+            }
+        });
+    });
+</script>

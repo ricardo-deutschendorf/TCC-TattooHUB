@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+  <link href="stylesheets/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="stylesheets/slick.css" />
+  <link href="stylesheets/tattohub.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <main>
+    <section class="sign-in-form section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto col-12">
+            <h1 class="hero-title text-center mb-5">Login</h1>
+            <div class="row">
+              <div class="col-lg-8 col-11 mx-auto">
+                <% if (message.length> 0) { %>
+                  <div class="alert alert-danger">
+                    <%= message %>
+                  </div>
+                  <% } %>
+                    <form role="form" method="post" action="/login">
+                      <div class="form-floating mb-4 p-0">
+                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control"
+                          placeholder="Email address" required />
+                        <label for="email">Email</label>
+                      </div>
+                      <div class="form-floating p-0">
+                        <input type="password" name="senha" id="password" class="form-control" placeholder="Password"
+                          required />
+                        <label for="password">Senha</label>
+                      </div>
+                      <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
+                        Login
+                      </button>
+                      <p class="text-center">
+                        Não tem uma conta? <a href="/cadastro">Crie uma!</a>
+                      </p>
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- jeitinho brasileiro -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p></p>
+  <footer class="site-footer">
+    <p>feito por Ricardo Deutschendorf</p>
+  </footer>
+
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/bootstrap.bundle.min.js"></script>
+  <script src="javascripts/Headroom.js"></script>
+  <script src="javascripts/jQuery.headroom.js"></script>
+  <script src="javascripts/slick.min.js"></script>
+  <script src="javascripts/custom.js"></script>
+
+</body>
+
+</html>
