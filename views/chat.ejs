@@ -1,28 +1,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<link
-  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-  rel="stylesheet"
-/>
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
 <link href="/stylesheets/chat.css" rel="stylesheet" />
 
-
 <div class="page-content page-container chat-container" id="page-content">
-  
   <div class="padding chat-card centralized content">
-    <div class="left-aligned">`
-      <img class="w-10 h-10 rounded-full chat-profile-pic fotodolado" src="/imagens/<%=imagem%>">
+    <div class="left-aligned">
+      <img class="w-10 h-10 rounded-full chat-profile-pic fotodolado" src="/imagens/<%= imagem %>">
       <div class="left-aligned2">
-      <h1>Nome artistico</h1>
-      <h2>estilo</h2>
-      <h4>descricao do tatuador de merda</h4>
-
+        <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
+        <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
+        <h4><%= descricao %></h4> <!-- Descrição do tatuador -->
+      </div>
     </div>
-    </div>
-
-
-
 
     <div class="row container d-flex justify-content-center">
       <div class="col-md-6">
@@ -35,29 +26,30 @@
             id="chat-conteudo"
             style="overflow-y: scroll !important; height: 300px !important"
           ></div>
-  
+
           <form action="javascript:enviaMensagens()">
             <div class="publisher bt-1 border-light chat-input-container">
-              <% if(locals.imagem) {%> <% if(locals.imagem.search("https") ==
-              -1){%>
-              <img
-                src="/imagens/<%=imagem %>"
-                alt="Foto de perfil"
-                class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-              />
-              <% } else{%>
-              <img
-                src="<%=imagem%>"
-                alt="Foto de perfil"
-                class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-              />
-              <% }%> <% } else{%>
-              <img
-                src="/imagens/userDefault.png"
-                alt="Foto de perfil"
-                class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-              />
-              <%}%>
+              <% if (imagem) { %>
+                <% if (imagem.search("https") === -1) { %>
+                  <img
+                    src="/imagens/<%= imagem %>"
+                    alt="Foto de perfil"
+                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
+                  />
+                <% } else { %>
+                  <img
+                    src="<%= imagem %>"
+                    alt="Foto de perfil"
+                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
+                  />
+                <% } %>
+              <% } else { %>
+                <img
+                  src="/imagens/userDefault.png"
+                  alt="Foto de perfil"
+                  class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
+                />
+              <% } %>
 
               <input
                 class="publisher-input chat-input"
@@ -69,7 +61,6 @@
               <button type="submit">
                 <i class="fa fa-paper-plane"></i>
               </button>
-            
             </div>
           </form>
         </div>
@@ -78,10 +69,13 @@
   </div>
 </div>
 
-
 <script type="text/javascript" src="/javascripts/chat.js"></script>
 <script type="text/javascript" language="javascript">
-  buscaMensagens(); // dispara a função para já buscar os dados quando carregar a página
-  // Executa novamente a função a cada 5000 milissegundos (5 segundos)
-  setInterval("buscaMensagens()", 5000);
+  try {
+    buscaMensagens(); // Dispara a função para já buscar os dados quando carregar a página
+    // Executa novamente a função a cada 5000 milissegundos (5 segundos)
+    setInterval(() => buscaMensagens(), 5000);
+  } catch (err) {
+    console.error('Erro ao executar buscaMensagens:', err);
+  }
 </script>

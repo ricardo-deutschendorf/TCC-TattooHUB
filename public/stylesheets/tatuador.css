@@ -104,7 +104,7 @@
 .content {
     background-color: #ffffff;       /* Cor de fundo da div */
     padding: 20px;                   /* Espaçamento interno */
-    border-radius: 10px;             /* Bordas arredondadas */
+    border-radius: 15px;             /* Bordas arredondadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: left;            /* Centraliza o texto dentro da div */
 }
