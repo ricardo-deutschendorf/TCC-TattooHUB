@@ -69,16 +69,8 @@
     text-decoration:underline;
 }
 
-.shadowfoda {
-    width: 100%; /* Largura da imagem */
-    height: 150px; /* Altura fixa da imagem */
-    object-fit: cover; /* Corta a imagem mantendo a proporção */
-    border-radius: 5px 5px 0 0; /* Bordas arredondadas no topo */
-    overflow: hidden;
-}
 
 .botaomaiszika {
-    background-color: red;
     position: absolute;
     top: 10px; /* Mantém o botão no topo */
     right: 10px; /* Mantém o botão à direita */
@@ -87,6 +79,9 @@
     border-radius: 10px;
     cursor: pointer;
     z-index: 10; /* Garante que o botão fique acima de outros elementos */
+    border: 2px solid #FF4400;
+    color: #000;
+    box-shadow: 0 4px 8px rgba(0.1, 0.2, 0.3, 0.4);
 }
 
 .conteiner {
@@ -131,6 +126,10 @@
     background-color: #FAF3E0;
 }
 
+.localchat {
+    
+}
+
 .chatacima{
     font-size: 20px;
     font-family: sans-serif;
@@ -154,3 +153,24 @@
     object-fit: cover; /* Faz a imagem cobrir o espaço da caixa */
     border: 2px solid #ccc; /* Borda opcional */
   }
+
+  .bordadaora {
+    border: 3px solid #FF4400;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 4, 8, 12);
+  }
+
+ .textolinha {
+    text-decoration: underline;
+ }
+
+ .tamanhodasinfo {
+    width: 40%; /* Aumenta a largura para 80% da largura do contêiner */
+    height: 400px; /* Define a altura para 400px */
+    margin-left: 15%;
+ }
+
+ .tamanhocard{
+    margin-right: 15%;
+ }
