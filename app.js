@@ -16,6 +16,7 @@ var loginRouter = require('./routes/login');
 var tatuadorRouter = require('./routes/tatuador');
 var logoutRouter = require('./routes/logout');
 var chatRouter = require('./routes/chat');
+var perfilRouter = require('./routes/perfil');
 
 // Inicializa o aplicativo Express
 var app = express();
@@ -68,6 +69,7 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/tatuador', authenticationMiddleware, tatuadorRouter);
 app.use('/chat', authenticationMiddleware, chatRouter); 
+app.use('/perfil', authenticationMiddleware, perfilRouter);
 
 
 app.use(function(req, res, next) {

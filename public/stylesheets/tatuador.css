@@ -123,15 +123,11 @@
 }
 
 .chataqui{
-    background-color: #FAF3E0;
-}
-
-.localchat {
-    
+    background-color: #333333
 }
 
 .chatacima{
-    font-size: 20px;
+    font-size: 30px;
     font-family: sans-serif;
     text-decoration:underline;
 }
@@ -142,17 +138,20 @@
     align-items: flex-start;      /* Alinha os itens no topo */
     
 }
-.left-aligned2 {
-    flex-direction: column;
-} 
-
 .fotodolado {
-    width: 80px; /* Ajuste o tamanho conforme necessário */
-    height: 80px; /* Mantém a proporção da imagem */
-    border-radius: 50%; /* Torna a imagem redonda */
-    object-fit: cover; /* Faz a imagem cobrir o espaço da caixa */
+    width: 320px; /* Largura */
+    height: 200px; /* Altura igual à largura para ser quadrada */
+    border-radius: 10%; /* Arredondar levemente os cantos, se desejar */
+    object-fit: cover; /* Faz a imagem cobrir o espaço */
     border: 2px solid #ccc; /* Borda opcional */
-  }
+    margin-bottom: 10px; /* Espaçamento abaixo da imagem */
+}
+
+.left-aligned{
+    display: flex;               /* Usar Flexbox para layout */
+    flex-direction: column;      /* Coloca os itens em coluna */
+    align-items: center;         /* Centraliza o conteúdo horizontalmente */
+}
 
   .bordadaora {
     border: 3px solid #FF4400;
@@ -167,10 +166,51 @@
 
  .tamanhodasinfo {
     width: 40%; /* Aumenta a largura para 80% da largura do contêiner */
-    height: 400px; /* Define a altura para 400px */
-    margin-left: 15%;
+    height: 90vh; /* Define a altura para 400px */
+    margin-top: 4.5%;
+ }
+ .tamanhochat{
+    width: 60%;
+    height: 90vh;
+    margin-top: 4.5%;
  }
 
  .tamanhocard{
     margin-right: 15%;
+ }
+
+ .tamanhoconversa{
+    width: 100%;
+ }
+
+ .headerchat{
+    text-align: center;
+ }
+
+ .chatinteiro{
+    border-radius: 15px
+ }
+
+ .botaomaluco{
+  position: relative;
+  display: block;
+  width: 200px;
+  height: 36px;
+  border-radius: 18px;
+  background-color: #FF4400;
+  border: solid 1px transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300; 
+  cursor: pointer;
+ }
+ 
+ .naotemtatuador{
+    text-align: center;
+    font-size: 22px;
+ }
+
+ .emoji{
+    text-align: center;
+    font-size: 40px;
  }

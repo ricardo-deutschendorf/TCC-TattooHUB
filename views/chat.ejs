@@ -5,26 +5,30 @@
 <link href="/stylesheets/chat.css" rel="stylesheet" />
 
 <div class="page-content page-container chat-container" id="page-content">
+
+
+  <!--informações do usuario-->
   <div class="padding chat-card centralized content">
     <div class="left-aligned bordadaora tamanhodasinfo">
-      <img class="w-10 h-10 rounded-full chat-profile-pic fotodolado" src="/imagens/<%= imagem %>">
+      <img class="fotodolado" src="/imagens/<%= imagem %>">
       <div class="left-aligned2">
-        <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
-        <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
-        <h4><%= descricao %></h4> <!-- Descrição do tatuador -->
+          <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
+          <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
+          <h4><%= descricao %> a aqui vai estar a descrição</h4> <!-- Descrição do tatuador -->
       </div>
-    </div>
-
-    <div class="row container d-flex justify-content-center">
-      <div class="col-md-7 bordadaora">
-        <div class=" ">
-          <div class="card-header">
-            <h4 class="card-title chat-title"><strong class="chatacima">Chat</strong></h4>
+  </div>
+  <!--informações do usuario-->
+    <!--chat-->
+    <div class="row container d-flex tamanhochat tamanhoconversa">
+      <div class="col-md-12 bordadaora">
+        <div class="chatinteiro">
+          <div class="headerchat">
+            <h4 class="tamanhoconversa"><strong class="chatacima">Chat</strong></h4>
           </div>
           <div
             class="ps-container ps-theme-default ps-active-y chataqui"
             id="chat-conteudo"
-            style="overflow-y: scroll !important; height: 300px !important"
+            style="overflow-y: scroll !important; height: 690px !important"
           ></div>
 
           <form action="javascript:enviaMensagens()">
@@ -38,7 +42,7 @@
                   />
                 <% } else { %>
                   <img
-                    src="<%= imagem %>"
+                    src="<%=imagem%>"
                     alt="Foto de perfil"
                     class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
                   />
@@ -52,20 +56,20 @@
               <% } %>
 
               <input
-                class="publisher-input chat-input"
+                class="publisher-input chat-input textolinha"
                 type="text"
                 placeholder="Escreva uma mensagem"
                 id="mensagem"
               />
 
-              <button type="submit">
-                <i class="fa fa-paper-plane"></i>
-              </button>
+              <input type="submit" class="botaomaluco"></input>
             </div>
           </form>
         </div>
       </div>
     </div>
+
+        <!--chat-->
   </div>
 </div>
 

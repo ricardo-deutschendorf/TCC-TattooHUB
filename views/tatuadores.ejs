@@ -8,7 +8,6 @@
                     <span class="d-block text-dark">Recentes</span>
                 </h1>
             </div>
-            <img src="//images/carrosel/tatuage4.jpg" class="img-fluid" alt="">
         </div>
     </div>
 </div>
@@ -20,14 +19,17 @@
             </div>
 
             <!-- Card 1 -->
+            <% if (tatuadores.length===0) { %>
+                <p class="naotemtatuador">Não há tatuadores disponíveis no momento.</p>
+                <p class="emoji">😥</p>
+                <% } %>
             <% for (let i=0; i < tatuadores.length; i++) { %>
                 <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                     <div class="card bordadaora" style="width: 18rem;">
                         <div class="conteiner">
                             <form method="POST" action="/tatuador/apagar/<%=tatuadores[i].id%>">
                                 <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
-                                <img src="/imagens/<%=tatuadores[i].imagem %>" class="card-img-top"
-                                    alt="...">
+                                <img src="/imagens/<%=tatuadores[i].imagem %>" class="card-img-top" alt="...">
                             </form>
                         </div>
                         <div class="card-body">
@@ -48,12 +50,15 @@
                             </ul>
                         </div>
                         <div class="card-body alinharbotaocard">
-                            <button href="/tatuador/<%=tatuadores[i].id%>" class="card-link botaozika">Perfil</button>
-                            <form method="POST" action="/chat">
-                                <input type="hidden" name="idUser" value="<%=tatuadores[i].id%>%>" />
-                                <button class="botaozika">Chat</button>
+                            <form method="POST" action="/perfil">
+                                <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
+                                <button type="submit" class="card-link botaozika">Perfil</button>
                             </form>
-                        </div>
+                            <form method="POST" action="/chat">
+                                <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
+                                <button type="submit" class="botaozika">Chat</button>
+                            </form>
+                        </div>                        
                     </div>
                 </div>
                 <% } %>

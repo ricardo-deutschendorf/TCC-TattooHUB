@@ -64,6 +64,10 @@
             <div class="col-12 text-center">
                 <h2 class="mb-5">Tatuadores recentes</h2>
             </div>
+            <% if (tatuadores.length===0) { %>
+                <p class="naotemtatuador">Não há tatuadores disponíveis no momento.</p>
+                <p class="emoji">😥</p>
+                <% } %>
             <% for (let i = 0; i < Math.min(tatuadores.length, 4); i++) { %>
                 <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
                     <div class="card bordadaora" style="width: 18rem;">
@@ -92,7 +96,6 @@
                 </div>
             <% } %>
             
-
             <div class="col-12 text-center mt-4">
                 <a href="/tatuador/listar" class="">Veja todos Tatuadores</a>
             </div>
