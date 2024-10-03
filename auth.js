@@ -2,6 +2,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const Usuario = require("./models/Usuario");
 
+
+
 module.exports = function (passport) {
   passport.serializeUser((user, done) => {
     done(null, {
@@ -12,6 +14,8 @@ module.exports = function (passport) {
       imagem: user.imagem,
     });
   });
+
+
 
   passport.deserializeUser(async (id, done) => {
     try {

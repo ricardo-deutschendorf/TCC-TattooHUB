@@ -84,4 +84,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.get('/tatuadores', (req, res) => {
+  const userId = req.session.userId; // Supondo que o ID do usuário esteja armazenado na sessão
+  const tatuadores = getTatuadores(); // Função que busca os tatuadores
+  res.render('tatuadores', { tatuadores, userId });
+});
+
 module.exports = app;

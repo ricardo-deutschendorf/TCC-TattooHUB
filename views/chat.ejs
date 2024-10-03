@@ -5,19 +5,17 @@
 <link href="/stylesheets/chat.css" rel="stylesheet" />
 
 <div class="page-content page-container chat-container" id="page-content">
-
-
   <!--informações do usuario-->
   <div class="padding chat-card centralized content">
     <div class="left-aligned bordadaora tamanhodasinfo">
       <img class="fotodolado" src="/imagens/<%= imagem %>">
       <div class="left-aligned2">
-          <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
-          <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
-          <h4><%= descricao %> a aqui vai estar a descrição</h4> <!-- Descrição do tatuador -->
+        <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
+        <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
+        <h4><%= descricao %> a aqui vai estar a descrição</h4> <!-- Descrição do tatuador -->
       </div>
-  </div>
-  <!--informações do usuario-->
+    </div>
+    <!--informações do usuario-->
     <!--chat-->
     <div class="row container d-flex tamanhochat tamanhoconversa">
       <div class="col-md-12 bordadaora">
@@ -42,7 +40,7 @@
                   />
                 <% } else { %>
                   <img
-                    src="<%=imagem%>"
+                    src="<%= imagem %>"
                     alt="Foto de perfil"
                     class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
                   />
@@ -68,8 +66,7 @@
         </div>
       </div>
     </div>
-
-        <!--chat-->
+    <!--chat-->
   </div>
 </div>
 

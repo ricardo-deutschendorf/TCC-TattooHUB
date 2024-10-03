@@ -167,12 +167,14 @@
  .tamanhodasinfo {
     width: 40%; /* Aumenta a largura para 80% da largura do contêiner */
     height: 90vh; /* Define a altura para 400px */
+    margin-bottom: 1%;
     margin-top: 4.5%;
  }
  .tamanhochat{
     width: 60%;
     height: 90vh;
     margin-top: 4.5%;
+    margin-bottom: 1%;
  }
 
  .tamanhocard{

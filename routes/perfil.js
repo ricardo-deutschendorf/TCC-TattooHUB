@@ -2,20 +2,21 @@ var express = require("express");
 var router = express.Router();
 var Tatuador = require("../models/Usuario"); // Ajuste o caminho se necessário
 
-// Rota para acessar o perfil
-router.get("/", function (req, res, next) {
-  // Busca o usuário logado
-  const userId = req.session.passport.user.id;
+router.post("/", function (req, res, next) {
+  const idUser = req.body.idUser;
 
-  // Busca os tatuadores
-  Tatuador.findAll({ where: { tipo: "tatuador" } })
-    .then((tatuadores) => {
-      // Renderiza a view passando o usuário logado e a lista de tatuadores
-      res.render("perfil", { title: "Perfil", tatuadores, userId });
+  // Busca o tatuador pelo ID enviado
+  Tatuador.findByPk(idUser)
+    .then((tatuador) => {
+      if (!tatuador) {
+        return res.status(404).render('error', { message: 'Tatuador não encontrado' });
+      }
+      // Renderiza a view do perfil com os dados do tatuador
+      res.render("perfil", { title: "Perfil", tatuador });
     })
     .catch((err) => {
-      console.error(err); // Log de erro
-      res.render("perfil", { title: "Perfil", tatuadores: [], userId });
+      console.error(err);
+      res.status(500).render('error', { message: 'Erro ao buscar o tatuador' });
     });
 });
 

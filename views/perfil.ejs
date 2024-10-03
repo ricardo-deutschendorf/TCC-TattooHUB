@@ -2,11 +2,32 @@
   <div class="padding chat-card centralized content">
     <div class="bordadaora tamanhodasinfo">
       <div class="left-aligned">
-      <h2>aqui nome do tatuador</h1> <br>
+        <img class="fotodolado" src="/imagens/<%= imagem %>">
+        <h1><%= tatuador.nome_artistico %></h1> <!-- Acesso a tatuador.nome -->
+        <h6><%= tatuador.nome %></h6> <!-- Ajuste de exemplo -->
       </div>
-        <h6>aqui nome real do tatuador</h5>
-        <h3>estilo de arte</h2>
-        <p>descricao</p>
+      <div>
+      <strong>estilo de arte:</strong>
+      <p><%= tatuador.estilo %></p> <!-- Acesso a tatuador.estilo -->
     </div>
+      <h4><%= tatuador.descricao %></h4> <!-- Acesso a tatuador.descricao -->
+    </div>
+
+    <section>
+      <div class="padding chat-card centralized content">
+        <div class="bordadaora tamanhodasinfo">
+          <div class="left-aligned">
+            <img class="fotodolado" src="/imagens/<%= tatuador.imagem %>" alt="<%= tatuador.nome_artistico %>">
+            <h1><%= tatuador.nome_artistico %></h1> <!-- Nome artístico do tatuador -->
+            <h6><%= tatuador.nome %></h6> <!-- Nome real do tatuador -->
+          </div>
+          <div>
+            <strong>Estilo de arte:</strong>
+            <p><%= tatuador.estilo %></p> <!-- Estilo de arte do tatuador -->
+          </div>
+          <h4><%= tatuador.descricao %></h4> <!-- Descrição do tatuador -->
+        </div>
+      </div>
+    </section>
   </div>
 </section>

@@ -18,6 +18,12 @@ router.get("/listar", function (req, res, next) {
   });
 });
 
+router.get('/tatuadores', (req, res) => {
+  const userId = req.session.id; // Supondo que o ID do usuário logado esteja na sessão
+  const tatuadores = getTatuadores(); // Sua função que obtém a lista de tatuadores
+  res.render('tatuadores', { tatuadores, id });
+});
+
 router.post("/cadastroTatuagem", async function (req, res, next) {
   try {
     const form = new formidable.IncomingForm();
@@ -116,6 +122,7 @@ router.post("/apagar/:id", function (req, res) {
       res.redirect("/tatuador/listar?erro=1"); // Redireciona com erro se algo der errado
     });
 });
+
 
 module.exports = router;
 

@@ -28,9 +28,12 @@
                     <div class="card bordadaora" style="width: 18rem;">
                         <div class="conteiner">
                             <form method="POST" action="/tatuador/apagar/<%=tatuadores[i].id%>">
-                                <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
+                                <% if (id === tatuadores[i].id) { %>
+                                    <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
+                                <% } %>
                                 <img src="/imagens/<%=tatuadores[i].imagem %>" class="card-img-top" alt="...">
                             </form>
+                            
                         </div>
                         <div class="card-body">
                             <h5 class="card-title textolinha">
@@ -62,6 +65,7 @@
                     </div>
                 </div>
                 <% } %>
+            
         </div>
     </div>
 </section>
