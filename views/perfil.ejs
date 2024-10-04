@@ -3,31 +3,81 @@
     <div class="bordadaora tamanhodasinfo">
       <div class="left-aligned">
         <img class="fotodolado" src="/imagens/<%= imagem %>">
-        <h1><%= tatuador.nome_artistico %></h1> <!-- Acesso a tatuador.nome -->
-        <h6><%= tatuador.nome %></h6> <!-- Ajuste de exemplo -->
+        <h1><%= tatuador.nome_artistico %></h1>
+        <h6><%= tatuador.nome %></h6>
       </div>
       <div>
-      <strong>estilo de arte:</strong>
-      <p><%= tatuador.estilo %></p> <!-- Acesso a tatuador.estilo -->
-    </div>
-      <h4><%= tatuador.descricao %></h4> <!-- Acesso a tatuador.descricao -->
-    </div>
-
-    <section>
-      <div class="padding chat-card centralized content">
-        <div class="bordadaora tamanhodasinfo">
-          <div class="left-aligned">
-            <img class="fotodolado" src="/imagens/<%= tatuador.imagem %>" alt="<%= tatuador.nome_artistico %>">
-            <h1><%= tatuador.nome_artistico %></h1> <!-- Nome artístico do tatuador -->
-            <h6><%= tatuador.nome %></h6> <!-- Nome real do tatuador -->
-          </div>
-          <div>
-            <strong>Estilo de arte:</strong>
-            <p><%= tatuador.estilo %></p> <!-- Estilo de arte do tatuador -->
-          </div>
-          <h4><%= tatuador.descricao %></h4> <!-- Descrição do tatuador -->
-        </div>
+        <strong>estilo de arte:</strong>
+        <p><%= tatuador.estilo %></p>
       </div>
-    </section>
+      <h4><%= tatuador.descricao %></h4>
+    </div>
+  </div>
+
+  <!-- Seção de Comentários -->
+  <div class="comentarios">
+    <h3>Comentários</h3>
+    <div id="comentarios-antigos" class="comentarios-antigos">
+      <!-- Comentários antigos serão carregados aqui -->
+    </div>
+    <form id="comentarioForm">
+      <textarea id="comentario" name="comentario" rows="4" cols="50" placeholder="Adicione seu comentário aqui..."></textarea>
+      <input type="hidden" id="idUser" value="<%= usuario.id %>">
+      <button type="submit">Enviar</button>
+    </form>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Função para buscar e exibir comentários antigos
+  function carregarComentarios() {
+    fetch('/perfil/buscarComentarios')
+      .then(response => response.json())
+      .then(data => {
+        var comentariosAntigos = document.getElementById('comentarios-antigos');
+        comentariosAntigos.innerHTML = ''; // Limpa os comentários antigos
+        data.comentarios.forEach(comentario => {
+          var novoComentario = document.createElement('div');
+          novoComentario.classList.add('comentario');
+          novoComentario.innerHTML = `<p><strong>${comentario.usuarioNome}:</strong> ${comentario.texto}</p>`;
+          comentariosAntigos.appendChild(novoComentario);
+        });
+      })
+      .catch(error => {
+        console.error('Erro ao carregar comentários:', error);
+      });
+  }
+
+  // Carregar comentários ao carregar a página
+  carregarComentarios();
+
+  // Enviar novo comentário
+  document.getElementById('comentarioForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var comentario = document.getElementById('comentario').value;
+    var idUser = document.getElementById('idUser').value;
+
+    fetch('/perfil/adicionarComentario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ idUser: idUser, comentario: comentario })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        carregarComentarios(); // Recarregar comentários após adicionar um novo
+        document.getElementById('comentario').value = '';
+      } else {
+        alert('Erro ao adicionar comentário');
+      }
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+    });
+  });
+});
+</script>

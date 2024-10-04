@@ -18,7 +18,27 @@ con.connect(function (err) {
     } else {
       console.log("Erro ao criar o banco de dados");
     }
-  });
 
-  con.end();
+    // Conectar ao banco de dados criado
+    con.changeUser({ database: 'tattoohub' }, function (err) {
+      if (err) throw err;
+
+      // Criar tabela Comentarios
+      var createTableSql = `
+        CREATE TABLE IF NOT EXISTS Comentarios (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          usuarioId INT NOT NULL,
+          texto VARCHAR(255) NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+          FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
+        )
+      `;
+      con.query(createTableSql, function (err, result) {
+        if (err) throw err;
+        console.log("Tabela Comentarios criada");
+        con.end();
+      });
+    });
+  });
 });
