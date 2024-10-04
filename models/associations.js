@@ -15,3 +15,10 @@ Tatuagem.belongsTo(Usuario, { foreignKey: "tatuador"});
 
 Usuario.hasMany(Comentario, { foreignKey: 'usuarioId' });
 Comentario.belongsTo(Usuario, { foreignKey: 'usuarioId' });
+
+module.exports = {
+    Usuario,
+    Chat,
+    Tatuagem,
+    Comentario
+};

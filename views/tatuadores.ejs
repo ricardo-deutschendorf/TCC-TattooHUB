@@ -52,15 +52,15 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body alinharbotaocard">
-                            <form method="GET" action="/perfil/<%= tatuadores[i].id %>">
-                                <button type="submit" class="card-link botaozika">Perfil</button>
-                            </form>
-                            <form method="POST" action="/chat">
-                                <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
-                                <button type="submit" class="botaozika">Chat</button>
-                            </form>
-                        </div>                        
+                                                                      <div class="card-body alinharbotaocard">
+                                                <form method="GET" action="/perfil/<%= tatuadores[i].id %>">
+                                                    <button type="submit" class="card-link botaozika">Perfil</button>
+                                                </form>
+                                                <form method="GET" action="/chat">
+                                                    <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
+                                                    <button type="submit" class="botaozika">Chat</button>
+                                                </form>
+                                            </div>
                     </div>
                 </div>
                 <% } %>

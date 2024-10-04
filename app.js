@@ -18,6 +18,7 @@ var tatuadorRouter = require('./routes/tatuador');
 var logoutRouter = require('./routes/logout');
 var chatRouter = require('./routes/chat');
 var perfilRouter = require('./routes/perfil');
+var comentariosRouter = require('./routes/comentarios');
 
 // Inicializa o aplicativo Express
 var app = express();
@@ -82,7 +83,7 @@ app.use('/logout', logoutRouter);
 app.use('/tatuador', authenticationMiddleware, tatuadorRouter);
 app.use('/chat', authenticationMiddleware, chatRouter); 
 app.use('/perfil', authenticationMiddleware, perfilRouter);
-
+app.use('/comentarios', authenticationMiddleware, comentariosRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

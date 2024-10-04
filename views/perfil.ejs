@@ -28,56 +28,6 @@
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Função para buscar e exibir comentários antigos
-  function carregarComentarios() {
-    fetch('/perfil/buscarComentarios')
-      .then(response => response.json())
-      .then(data => {
-        var comentariosAntigos = document.getElementById('comentarios-antigos');
-        comentariosAntigos.innerHTML = ''; // Limpa os comentários antigos
-        data.comentarios.forEach(comentario => {
-          var novoComentario = document.createElement('div');
-          novoComentario.classList.add('comentario');
-          novoComentario.innerHTML = `<p><strong>${comentario.usuarioNome}:</strong> ${comentario.texto}</p>`;
-          comentariosAntigos.appendChild(novoComentario);
-        });
-      })
-      .catch(error => {
-        console.error('Erro ao carregar comentários:', error);
-      });
-  }
 
-  // Carregar comentários ao carregar a página
-  carregarComentarios();
 
-  // Enviar novo comentário
-  document.getElementById('comentarioForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    var comentario = document.getElementById('comentario').value;
-    var idUser = document.getElementById('idUser').value;
-
-    fetch('/perfil/adicionarComentario', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ idUser: idUser, comentario: comentario })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        carregarComentarios(); // Recarregar comentários após adicionar um novo
-        document.getElementById('comentario').value = '';
-      } else {
-        alert('Erro ao adicionar comentário');
-      }
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-    });
-  });
-});
-</script>
+ 
