@@ -1,7 +1,6 @@
+// Usuario.js
 const database = require("../db");
-const Sequelize = require("sequelize");
-const Chat = require("./Chat");
-const Tatuagem = require("./Tatuagem");
+const { Sequelize, DataTypes } = require('sequelize');
 
 const Usuario = database.define("usuario", {
   id: {
@@ -18,16 +17,8 @@ const Usuario = database.define("usuario", {
   estudio: { type: Sequelize.STRING, allowNull: true },
   nome_artistico: { type: Sequelize.STRING, allowNull: true },
   estilo: { type: Sequelize.STRING, allowNull: true },
+}, {
+  timestamps: false
 });
-
-Usuario.hasMany(Chat, { foreignKey: "enviou_id"});
-Usuario.hasMany(Chat, { foreignKey: "recebeu_id"});
-
-Chat.belongsTo(Usuario, { foreignKey: "enviou_id"});
-Chat.belongsTo(Usuario, { foreignKey: "recebeu_id",});
-
-Usuario.hasMany(Tatuagem, { foreignKey: "tatuador"});
-Tatuagem.belongsTo(Usuario, { foreignKey: "tatuador"});
-
 
 module.exports = Usuario;

@@ -6,6 +6,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
+var sequelize = require('./db');
 var expressLayouts = require("express-ejs-layouts");
 require('dotenv').config();
 
@@ -22,6 +23,16 @@ var perfilRouter = require('./routes/perfil');
 var app = express();
 
 require('./auth')(passport);
+
+require('./models/Usuario');
+require('./models/Chat');
+require('./models/Tatuagem');
+require('./models/Comentario');
+require('./models/associations');
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -51,6 +62,7 @@ function authenticationMiddleware(req, res, next) {
     res.locals.imagem = req.session.passport.user.imagem;
     res.locals.nome = req.session.passport.user.nome;
     res.locals.tipo = req.session.passport.user.tipo;
+    req.session.usuario = req.session.passport.user; // Set the usuario session variable
     return next();
   }
 
@@ -82,12 +94,6 @@ app.use(function(err, req, res, next) {
 
   res.status(err.status || 500);
   res.render('error', { message: err.message, error: err });
-});
-
-app.get('/tatuadores', (req, res) => {
-  const userId = req.session.userId; // Supondo que o ID do usuário esteja armazenado na sessão
-  const tatuadores = getTatuadores(); // Função que busca os tatuadores
-  res.render('tatuadores', { tatuadores, userId });
 });
 
 module.exports = app;

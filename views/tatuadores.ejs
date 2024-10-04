@@ -53,8 +53,7 @@
                             </ul>
                         </div>
                         <div class="card-body alinharbotaocard">
-                            <form method="POST" action="/perfil">
-                                <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
+                            <form method="GET" action="/perfil/<%= tatuadores[i].id %>">
                                 <button type="submit" class="card-link botaozika">Perfil</button>
                             </form>
                             <form method="POST" action="/chat">

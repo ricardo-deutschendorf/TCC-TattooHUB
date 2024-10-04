@@ -19,7 +19,6 @@ const Comentario = sequelize.define('Comentario', {
   timestamps: true // Adiciona campos createdAt e updatedAt automaticamente
 });
 
-// Definindo a associação
 Comentario.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
 module.exports = Comentario;

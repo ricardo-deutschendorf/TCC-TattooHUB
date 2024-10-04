@@ -2,14 +2,14 @@ var express = require("express");
 var router = express.Router();
 var Tatuador = require("../models/Usuario"); // Ajuste o caminho se necessário
 var Comentario = require("../models/Comentario"); // Ajuste o caminho se necessário
-var Usuario = require("../models/Usuario"); // Ajuste o caminho se necessário
+var Usuario = require("../models/Usuario"); // Add this line
 const createError = require('http-errors');
 
-router.post("/", function (req, res, next) {
-  const idUser = req.body.idUser;
+router.get("/:id", function (req, res, next) {
+  const id = req.params.id;
 
   // Busca o tatuador pelo ID enviado
-  Tatuador.findByPk(idUser)
+  Tatuador.findByPk(id)
     .then((tatuador) => {
       if (!tatuador) {
         return next(createError(404, 'Tatuador não encontrado'));
@@ -17,31 +17,29 @@ router.post("/", function (req, res, next) {
 
       // Busca os comentários relacionados ao tatuador, incluindo o nome do usuário
       Comentario.findAll({
-        where: { usuarioId: idUser },
-        include: [{ model: Usuario, attributes: ['nome'] }]
+        where: { usuarioId: id },
+        include: Usuario
       })
         .then((comentarios) => {
           // Renderiza a view do perfil com os dados do tatuador e os comentários
-          res.render("perfil", { title: "Perfil", tatuador, comentarios, usuarioNome: req.session.usuarioNome });
+          res.render("perfil", { title: "Perfil", tatuador, comentarios, usuario: req.session.usuario, usuarioNome: req.session.usuarioNome });
         })
         .catch((err) => {
-          console.error(err);
+          console.error("Erro ao buscar os comentários:", err);
           next(createError(500, 'Erro ao buscar os comentários'));
         });
     })
     .catch((err) => {
-      console.error(err);
+      console.error("Erro ao buscar o tatuador:", err);
       next(createError(500, 'Erro ao buscar o tatuador'));
     });
 });
-
-
 // Rota para adicionar comentário
 router.post("/adicionarComentario", function (req, res, next) {
-  const { idUser, comentario } = req.body;
+  const { id, comentario } = req.body;
 
   // Busca o usuário pelo ID
-  Usuario.findByPk(idUser)
+  Usuario.findByPk(id)
     .then((usuario) => {
       if (!usuario) {
         return next(createError(404, 'Usuário não encontrado'));
@@ -49,7 +47,7 @@ router.post("/adicionarComentario", function (req, res, next) {
 
       // Cria um novo comentário
       Comentario.create({
-        usuarioId: idUser,
+        usuarioId: id,
         texto: comentario
       })
         .then((novoComentario) => {
@@ -64,20 +62,7 @@ router.post("/adicionarComentario", function (req, res, next) {
       console.error(err);
       next(createError(500, 'Erro ao buscar o usuário'));
     });
-    router.get('/buscarComentarios', async (req, res) => {
-      try {
-        const comentarios = await Comentario.findAll({
-          include: {
-            model: Usuario,
-            attributes: ['nome']
-          }
-        });
-        res.json({ comentarios: comentarios.map(c => ({ usuarioNome: c.Usuario.nome, texto: c.texto })) });
-      } catch (error) {
-        console.error('Erro ao buscar comentários:', error);
-        res.status(500).json({ error: 'Erro ao buscar comentários' });
-      }
-    });
 });
+
 
 module.exports = router;
