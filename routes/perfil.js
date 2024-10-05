@@ -1,68 +1,41 @@
-var express = require("express");
-var router = express.Router();
-var Tatuador = require("../models/Usuario"); // Ajuste o caminho se necessário
-var Comentario = require("../models/Comentario"); // Ajuste o caminho se necessário
-var Usuario = require("../models/Usuario"); // Add this line
-const createError = require('http-errors');
-
-router.get("/:id", function (req, res, next) {
-  const id = req.params.id;
-
-  // Busca o tatuador pelo ID enviado
-  Tatuador.findByPk(id)
-    .then((tatuador) => {
+  const express = require('express');
+  const router = express.Router();
+  const Usuario = require('../models/Usuario');
+  const Comentario = require('../models/comentarios');
+  const createError = require('http-errors');
+  
+  // Rota para exibir o perfil do tatuador
+  router.get('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    console.log(`ID recebido: ${id}`); // Log para verificar o ID recebido
+  
+    try {
+      const tatuador = await Usuario.findByPk(id);
       if (!tatuador) {
+        console.log(`Tatuador com ID ${id} não encontrado`); // Log para verificar se o tatuador foi encontrado
         return next(createError(404, 'Tatuador não encontrado'));
       }
-
-      // Busca os comentários relacionados ao tatuador, incluindo o nome do usuário
-      Comentario.findAll({
-        where: { usuarioId: id },
-        include: Usuario
-      })
-        .then((comentarios) => {
-          // Renderiza a view do perfil com os dados do tatuador e os comentários
-          res.render("perfil", { title: "Perfil", tatuador, comentarios, usuario: req.session.usuario, usuarioNome: req.session.usuarioNome });
-        })
-        .catch((err) => {
-          console.error("Erro ao buscar os comentários:", err);
-          next(createError(500, 'Erro ao buscar os comentários'));
+  
+      try {
+        const comentarios = await Comentario.findAll({ where: { usuarioId: id } });
+        // Renderiza a view do perfil com os dados do tatuador e comentários
+        res.render('perfil', { 
+          title: 'Perfil', 
+          usuario: tatuador, // Passa o tatuador como usuario
+          nome_artistico: tatuador.nome_artistico, // Passa o nome artístico do tatuador
+          usuarioNome: tatuador.nome, // Passa o nome do tatuador
+          estilo: tatuador.estilo, // Passa o estilo do tatuador
+          comentarios, // Passa a variável comentarios para a view
+          usuarioLogado: req.session.usuario // Passa o usuário logado para a view
         });
-    })
-    .catch((err) => {
-      console.error("Erro ao buscar o tatuador:", err);
-      next(createError(500, 'Erro ao buscar o tatuador'));
-    });
-});
-// Rota para adicionar comentário
-router.post("/adicionarComentario", function (req, res, next) {
-  const { id, comentario } = req.body;
-
-  // Busca o usuário pelo ID
-  Usuario.findByPk(id)
-    .then((usuario) => {
-      if (!usuario) {
-        return next(createError(404, 'Usuário não encontrado'));
+      } catch (err) {
+        console.error('Erro ao buscar os comentários:', err);
+        next(createError(500, 'Erro ao buscar os comentários'));
       }
-
-      // Cria um novo comentário
-      Comentario.create({
-        usuarioId: id,
-        texto: comentario
-      })
-        .then((novoComentario) => {
-          res.json({ success: true, comentario: novoComentario, usuarioNome: usuario.nome });
-        })
-        .catch((err) => {
-          console.error(err);
-          next(createError(500, 'Erro ao adicionar comentário'));
-        });
-    })
-    .catch((err) => {
-      console.error(err);
-      next(createError(500, 'Erro ao buscar o usuário'));
-    });
-});
-
-
-module.exports = router;
+    } catch (err) {
+      console.error('Erro ao buscar o tatuador:', err);
+      next(createError(500, 'Erro ao buscar o tatuador'));
+    }
+  });
+  
+  module.exports = router;

@@ -3,10 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var sequelize = require('./db');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
-var sequelize = require('./db');
 var expressLayouts = require("express-ejs-layouts");
 require('dotenv').config();
 
@@ -18,7 +18,7 @@ var tatuadorRouter = require('./routes/tatuador');
 var logoutRouter = require('./routes/logout');
 var chatRouter = require('./routes/chat');
 var perfilRouter = require('./routes/perfil');
-var comentariosRouter = require('./routes/comentarios');
+var comentariosRouter = require('./routes/comentarios'); // Ajuste o caminho conforme necessário
 
 // Inicializa o aplicativo Express
 var app = express();
@@ -27,13 +27,8 @@ require('./auth')(passport);
 
 require('./models/Usuario');
 require('./models/Chat');
-require('./models/Tatuagem');
-require('./models/Comentario');
+require('./models/comentarios'); // Ajuste o caminho conforme necessário
 require('./models/associations');
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-app.use(expressLayouts);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -44,7 +39,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(session({
   secret: 'secret',
@@ -63,11 +57,11 @@ function authenticationMiddleware(req, res, next) {
     res.locals.imagem = req.session.passport.user.imagem;
     res.locals.nome = req.session.passport.user.nome;
     res.locals.tipo = req.session.passport.user.tipo;
-    req.session.usuario = req.session.passport.user; // Set the usuario session variable
+    req.session.usuario = req.session.passport.user; // Define a variável de sessão usuario
     return next();
   }
 
-  if (req.path === "/login") return next();
+  if (req.path === "/login" || req.path === "/tatuadores") return next(); // Permite acesso à rota /tatuadores sem autenticação
   res.redirect("/login?erro=1");
 }
 
@@ -80,10 +74,11 @@ app.use('/users', usersRouter);
 app.use('/cadastro', cadastroRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/tatuadores', tatuadorRouter); // Adiciona a rota /tatuadores sem autenticação
 app.use('/tatuador', authenticationMiddleware, tatuadorRouter);
 app.use('/chat', authenticationMiddleware, chatRouter); 
 app.use('/perfil', authenticationMiddleware, perfilRouter);
-app.use('/comentarios', authenticationMiddleware, comentariosRouter);
+app.use('/comentarios', authenticationMiddleware, comentariosRouter); // Ajuste o caminho conforme necessário
 
 app.use(function(req, res, next) {
   next(createError(404));

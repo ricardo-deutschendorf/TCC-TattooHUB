@@ -1,129 +1,54 @@
-var express = require("express");
-var router = express.Router();
-var Tatuador = require("../models/Usuario");
-var Tatuagem = require("../models/Tatuagem");
-var formidable = require("formidable");
-var crypto = require("crypto");
-var path = require("path");
-var fs = require("fs");
+const express = require('express');
+const router = express.Router();
+const Usuario = require('../models/Usuario');
+const Comentario = require('../models/comentarios');
+const createError = require('http-errors');
 
-router.get("/cadastroTatuagem", function (req, res, next) {
-  res.render("cadastroTatuagem", {});
-});
-
-router.get("/listar", function (req, res, next) {
-  // Encontre apenas com o tipo tatuador
-  Tatuador.findAll({ where: { tipo: "tatuador" } }).then((tatuadores) => {
-    res.render("tatuadores", { tatuadores });
-  });
-});
-
-router.get('/tatuadores', (req, res) => {
-  const userId = req.session.id; // Supondo que o ID do usuário logado esteja na sessão
-  const tatuadores = getTatuadores(); // Sua função que obtém a lista de tatuadores
-  res.render('tatuadores', { tatuadores, id });
-});
-
-router.post("/cadastroTatuagem", async function (req, res, next) {
+// Rota para listar todos os tatuadores
+router.get('/', async (req, res, next) => {
   try {
-    const form = new formidable.IncomingForm();
-    form.parse(req, async (err, fields, files) => {
-      if (err) {
-        console.error(err);
-        return res.redirect("/cadastroTatuagem?erro=1");
-      }
-
-      const imagem = files["imagem"][0];
-
-      if (imagem.size == 0) {
-        return res.redirect("/cadastroTatuagem?erro=5");
-      }
-
-      if (files.imagem[0] && files.imagem[0].size > 0) {
-        const file = files.imagem[0];
-
-        const hash = crypto
-          .createHash("md5")
-          .update(Date.now().toString())
-          .digest("hex");
-
-        console.log(file.mimetype);
-        const fileExt = file.mimetype.toLowerCase();
-
-        if (
-          ![
-            "image/jpg",
-            "image/webp",
-            "image/jpeg",
-            "image/png",
-            "image/gif",
-          ].includes(fileExt)
-        ) {
-          console.log("O arquivo de imagem não possui uma extensão válida");
-          return res.redirect("/cadastroTatuagem?erro=4");
-        }
-
-        const nomeimg = hash + "." + files.imagem[0].mimetype.split("/")[1];
-        const newpath = path.join(
-          __dirname,
-          "../public/imagens/tatuagens/",
-          nomeimg
-        );
-
-        fs.rename(files.imagem[0].filepath, newpath, function (err) {
-          if (err) {
-            console.error(err);
-            return res.redirect("/cadastroTatuagem?erro=1");
-          }
-          console.log("Arquivo de imagem enviado com sucesso");
-          Tatuagem.create({
-            imagem: nomeimg,
-            descricao: fields.descricao[0],
-            preco: fields.preco[0],
-            tatuador: req.session.passport.user.id,
-          });
-          return res.redirect("/");
-        });
-      }
-    });
+    const tatuadores = await Usuario.findAll({ where: { tipo: 'tatuador' } });
+    res.render('tatuadores', { title: 'Tatuadores Recentes', tatuadores });
   } catch (err) {
-    console.error(err);
-    res.redirect("/cadastroTatuagem?erro=1");
+    console.error('Erro ao buscar os tatuadores:', err);
+    next(createError(500, 'Erro ao buscar os tatuadores'));
   }
 });
 
-router.get("/:id", function (req, res, next) {
-  Tatuador.findByPk(req.params.id).then((tatuador) => {
-    Tatuagem.findAll({ where: { tatuador: req.params.id } }).then((tatuagens) => {
-      res.render("paginaTatuador", { tatuador, tatuagens });
-    });
-  });
-});
+// Rota para exibir o perfil do tatuador
+router.get('/:id', async (req, res, next) => {
+  const id = parseInt(req.params.id, 10); // Converte o ID para um número inteiro
+  if (isNaN(id)) {
+    console.log(`ID inválido: ${req.params.id}`); // Log para verificar o ID inválido
+    return next(createError(400, 'ID inválido'));
+  }
 
-router.post("/apagar/:id", function (req, res) {
-  const tatuadorId = req.params.id; // Obtém o ID do tatuador a ser apagado
-
-  Tatuador.destroy({
-    where: {
-      id: tatuadorId
+  try {
+    const tatuador = await Usuario.findByPk(id);
+    if (!tatuador) {
+      console.log(`Tatuador com ID ${id} não encontrado`); // Log para verificar se o tatuador foi encontrado
+      return next(createError(404, 'Tatuador não encontrado'));
     }
-  })
-    .then(deleted => {
-      if (deleted) {
-        // Redireciona para a lista de tatuadores se a exclusão foi bem-sucedida
-        res.redirect("/tatuador/listar");
-      } else {
-        // Se nenhum tatuador foi encontrado, redirecione com erro
-        res.redirect("/tatuador/listar?erro=2"); // Tatuador não encontrado
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      res.redirect("/tatuador/listar?erro=1"); // Redireciona com erro se algo der errado
-    });
-});
 
+    try {
+      const comentarios = await Comentario.findAll({ where: { usuarioId: id } });
+      console.log(`Comentários encontrados: ${comentarios.length}`); // Log para verificar a quantidade de comentários encontrados
+      // Renderiza a view do perfil com os dados do tatuador e comentários
+      res.render('perfil', { 
+        title: 'Perfil', 
+        tatuador, 
+        usuario: req.session.usuario, 
+        usuarioNome: req.session.usuario.nome,
+        comentarios // Passa a variável comentarios para a view
+      });
+    } catch (err) {
+      console.error('Erro ao buscar os comentários:', err);
+      next(createError(500, 'Erro ao buscar os comentários'));
+    }
+  } catch (err) {
+    console.error('Erro ao buscar o tatuador:', err);
+    next(createError(500, 'Erro ao buscar o tatuador'));
+  }
+});
 
 module.exports = router;
-
-

@@ -1,4 +1,3 @@
-// Usuario.js
 const database = require("../db");
 const { Sequelize, DataTypes } = require('sequelize');
 

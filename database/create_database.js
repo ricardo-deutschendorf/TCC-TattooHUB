@@ -1,3 +1,4 @@
+// create_database.js
 var mysql = require("mysql");
 var con = mysql.createConnection({
   host: "localhost",
@@ -31,7 +32,7 @@ con.connect(function (err) {
           texto VARCHAR(255) NOT NULL,
           createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-          FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
+          FOREIGN KEY (usuarioId) REFERENCES Usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
         )
       `;
       con.query(createTableSql, function (err, result) {
