@@ -71,12 +71,3 @@
 </div>
 
 <script type="text/javascript" src="/javascripts/chat.js"></script>
-<script type="text/javascript" language="javascript">
-  try {
-    buscaMensagens(); // Dispara a função para já buscar os dados quando carregar a página
-    // Executa novamente a função a cada 5000 milissegundos (5 segundos)
-    setInterval(() => buscaMensagens(), 5000);
-  } catch (err) {
-    console.error('Erro ao executar buscaMensagens:', err);
-  }
-</script>

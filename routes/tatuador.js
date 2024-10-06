@@ -8,7 +8,7 @@ const createError = require('http-errors');
 router.get('/', async (req, res, next) => {
   try {
     const tatuadores = await Usuario.findAll({ where: { tipo: 'tatuador' } });
-    res.render('tatuadores', { title: 'Tatuadores Recentes', tatuadores });
+    res.render('tatuadores', { title: 'Tatuadores Recentes', tatuadores, usuario: req.session.usuario });
   } catch (err) {
     console.error('Erro ao buscar os tatuadores:', err);
     next(createError(500, 'Erro ao buscar os tatuadores'));
@@ -49,6 +49,7 @@ router.get('/:id', async (req, res, next) => {
     console.error('Erro ao buscar o tatuador:', err);
     next(createError(500, 'Erro ao buscar o tatuador'));
   }
+
 });
 
 module.exports = router;

@@ -1,4 +1,3 @@
-<!---head-->
 <!doctype html>
 <html lang="pt-br">
 
@@ -49,7 +48,6 @@
 
                 <div class="d-lg-none">
                     <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-
                     <a href="product-detail.html" class="bi-bag custom-icon"></a>
                 </div>
 
@@ -62,14 +60,24 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/tatuador">Tatuadores</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Sair</a>
-                        </li>
+                        <% if (usuario) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/chatAtivo">Chats Ativos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Sair</a>
+                            </li>
+                        <% } %>
                     </ul>
 
                     <div class="d-none d-lg-block">
-
-                        <a href="/login" class="bi-person custom-icon me-3"></a>
+                        <% if (usuario && usuario.imagem) { %>
+                            <a href="/perfil/<%= usuario.id %>">
+                                <img src="/imagens/<%= usuario.imagem %>" alt="Perfil" class="rounded-circle" width="40" height="40">
+                            </a>
+                        <% } else { %>
+                            <a href="/login" class="bi-person custom-icon me-3"></a>
+                        <% } %>
                     </div>
 
                 </div>
@@ -105,3 +113,4 @@
     <script src="/javascripts/slick.min.js"></script>
     <script src="/javascripts/custom.js"></script>
 </body>
+</html>

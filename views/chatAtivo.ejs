@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chats Ativos</title>
+  <link rel="stylesheet" href="/stylesheets/chat-ativos.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Chats Ativos</h1>
+    <div id="chats-ativos"></div>
+  </div>
+
+  <script type="text/javascript">
+    let buscaChatsAtivos = () => {
+      $.ajax({
+        url: "/chatAtivo/buscaChatsAtivos",
+        method: "GET",
+        success: function (data) {
+          if (data.trim() === "") {
+            $("#chats-ativos").html("<p class='no-chats'>Nenhum chat ativo no momento.</p>");
+          } else {
+            $("#chats-ativos").html(data);
+          }
+        },
+        error: function (err) {
+          console.error("Erro ao buscar chats ativos:", err);
+        },
+      });
+    };
+
+    // Dispara a função para já buscar os dados quando carregar a página
+    buscaChatsAtivos();
+  </script>
+</body>
+</html>

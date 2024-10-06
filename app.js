@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var sequelize = require('./db');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -17,6 +16,7 @@ var loginRouter = require('./routes/login');
 var tatuadorRouter = require('./routes/tatuador');
 var logoutRouter = require('./routes/logout');
 var chatRouter = require('./routes/chat');
+var chatAtivoRouter = require('./routes/chatAtivo'); // Adicionando a nova rota
 var perfilRouter = require('./routes/perfil');
 var comentariosRouter = require('./routes/comentarios'); // Ajuste o caminho conforme necessário
 
@@ -50,6 +50,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// Middleware to set res.locals.usuario
+app.use((req, res, next) => {
+  res.locals.usuario = req.session.usuario;
+  next();
+});
+
 function authenticationMiddleware(req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.logado = true;
@@ -76,7 +82,8 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/tatuadores', tatuadorRouter); // Adiciona a rota /tatuadores sem autenticação
 app.use('/tatuador', authenticationMiddleware, tatuadorRouter);
-app.use('/chat', authenticationMiddleware, chatRouter); 
+app.use('/chat', authenticationMiddleware, chatRouter);
+app.use('/chatAtivo', authenticationMiddleware, chatAtivoRouter); // Adicionando a nova rota
 app.use('/perfil', authenticationMiddleware, perfilRouter);
 app.use('/comentarios', authenticationMiddleware, comentariosRouter); // Ajuste o caminho conforme necessário
 
