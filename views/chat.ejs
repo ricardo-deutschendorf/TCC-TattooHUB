@@ -5,70 +5,62 @@
 <link href="/stylesheets/chat.css" rel="stylesheet" />
 
 <div class="page-content page-container chat-container" id="page-content">
-  <!--informações do usuario-->
   <div class="padding chat-card centralized content">
-    <div class="left-aligned bordadaora tamanhodasinfo">
-      <img class="fotodolado" src="/imagens/<%= imagem %>">
-      <div class="left-aligned2">
-        <h1 class=""><%= nome %></h1> <!-- Nome do tatuador -->
-        <h2><%= estilo %></h2> <!-- Estilo do tatuador -->
-        <div class="description">
-          <h4><%= descricao ? descricao : "Esse usuário ainda não tem descrição 😥" %></h4> <!-- Descrição do tatuador -->
+    <div class="user-chat-container">
+      <!--informações do usuario-->
+      <div class="left-aligned bordadaora tamanhodasinfo user-info">
+        <img class="fotodolado user-image" src="/imagens/<%= imagem %>">
+        <div class="left-aligned2 user-details">
+          <h1 class="user-name">
+            <%= nome %>
+          </h1> <!-- Nome do tatuador -->
+          <h2 class="user-style">
+            <%= estilo %>
+          </h2> <!-- Estilo do tatuador -->
+          <div class="description">
+            <h4>
+              <%= descricao ? descricao : "Esse usuário ainda não tem descrição 😥" %>
+            </h4> <!-- Descrição do tatuador -->
+          </div>
         </div>
       </div>
-    </div>
-    <!--informações do usuario-->
-    <!--chat-->
-    <div class="row container d-flex tamanhochat tamanhoconversa">
-      <div class="col-md-12 bordadaora">
+      <!--informações do usuario-->
+      <!--chat-->
+      <div class="chat-container bordadaora">
         <div class="chatinteiro">
           <div class="headerchat">
             <h4 class="tamanhoconversa"><strong class="chatacima">Chat</strong></h4>
           </div>
-          <div
-            class="ps-container ps-theme-default ps-active-y chataqui"
-            id="chat-conteudo"
-            style="overflow-y: scroll !important; height: 690px !important"
-          ></div>
+          <div class="ps-container ps-theme-default ps-active-y chataqui" id="chat-conteudo"
+            style="overflow-y: scroll !important; height: 690px !important">
+            <!-- As mensagens serão carregadas aqui -->
+          </div>
 
           <form action="javascript:enviaMensagens()">
             <div class="publisher bt-1 border-light chat-input-container">
               <% if (imagem) { %>
                 <% if (imagem.search("https") === -1) { %>
-                  <img
-                    src="/imagens/<%= imagem %>"
-                    alt="Foto de perfil"
-                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-                  />
+                  <img src="/imagens/<%= usuario.imagem %>" alt="Foto de perfil"
+                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
                 <% } else { %>
-                  <img
-                    src="<%= imagem %>"
-                    alt="Foto de perfil"
-                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-                  />
+                  <img src="<%= imagem %>" alt="Foto de perfil"
+                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
                 <% } %>
               <% } else { %>
-                <img
-                  src="/imagens/userDefault.png"
-                  alt="Foto de perfil"
-                  class="w-10 h-10 rounded-full chat-profile-pic imgdaora"
-                />
+                <img src="/imagens/userDefault.png" alt="Foto de perfil"
+                  class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
               <% } %>
 
-              <input
-                class="publisher-input chat-input textolinha"
-                type="text"
-                placeholder="Escreva uma mensagem"
-                id="mensagem"
-              />
+              <input class="publisher-input chat-input textolinha" type="text"
+                placeholder="Escreva uma mensagem" id="mensagem" />
 
               <input type="submit" class="botaomaluco"></input>
             </div>
           </form>
         </div>
       </div>
+      <!--chat-->
     </div>
-    <!--chat-->
   </div>
 </div>
 

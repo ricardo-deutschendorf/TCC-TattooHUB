@@ -6,31 +6,19 @@
   border: 0;
   border-radius: 0px;
   margin-bottom: 30px;
-  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.padding {
-  padding: 3rem !important;
-}
-
-
 .card-header {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
-  padding: 15px 20px;
   background-color: transparent;
   border-bottom: 1px solid rgba(77, 82, 89, 0.07);
 }
 
 .card-header .card-title {
-  padding: 0;
   border: none;
 }
 
@@ -43,8 +31,7 @@ h4.card-title {
 }
 
 .card-header > * {
-  margin-left: 8px;
-  margin-right: 8px;
+  margin: 0 8px;
 }
 
 .btn-secondary {
@@ -59,6 +46,7 @@ h4.card-title {
   padding: 2px 8px;
   line-height: 18px;
 }
+
 .btn-xs:hover {
   color: #fff !important;
 }
@@ -74,10 +62,6 @@ h4.card-title {
 
 .ps-container {
   position: relative;
-}
-
-.ps-container {
-  -ms-touch-action: auto;
   touch-action: auto;
   overflow: hidden !important;
   -ms-overflow-style: none;
@@ -90,7 +74,6 @@ h4.card-title {
 
 .media {
   padding: 16px 12px;
-  -webkit-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
 }
 
@@ -112,7 +95,6 @@ h4.card-title {
 }
 
 .media-chat .media-body {
-  -webkit-box-flex: initial;
   flex: initial;
   display: table;
 }
@@ -142,9 +124,8 @@ h4.card-title {
 }
 
 .media-meta-day {
-  -webkit-box-pack: justify;
+  display: flex;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
   margin-bottom: 0;
   color: #8b95a5;
@@ -152,29 +133,15 @@ h4.card-title {
   font-weight: 400;
 }
 
-.media {
-  padding: 16px 12px;
-  -webkit-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
+.media-meta-day::before,
+.media-meta-day::after {
+  content: "";
+  flex: 1 1;
+  border-top: 1px solid #ebebeb;
 }
 
 .media-meta-day::before {
   margin-right: 16px;
-}
-
-.media-meta-day::before,
-.media-meta-day::after {
-  content: "";
-  -webkit-box-flex: 1;
-  flex: 1 1;
-  border-top: 1px solid #ebebeb;
-}
-
-.media-meta-day::after {
-  content: "";
-  -webkit-box-flex: 1;
-  flex: 1 1;
-  border-top: 1px solid #ebebeb;
 }
 
 .media-meta-day::after {
@@ -184,20 +151,7 @@ h4.card-title {
 .media-chat.media-chat-reverse {
   padding-right: 12px;
   padding-left: 64px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
   flex-direction: row-reverse;
-}
-
-.media-chat {
-  padding-right: 64px;
-  margin-bottom: 0;
-}
-
-.media {
-  padding: 16px 12px;
-  -webkit-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
 }
 
 .media-chat.media-chat-reverse .media-body p {
@@ -205,14 +159,6 @@ h4.card-title {
   clear: right;
   background-color: #48b0f7;
   color: #fff;
-}
-
-.media-chat .media-body p {
-  position: relative;
-  padding: 6px 8px;
-  margin: 4px 0;
-  background-color: #f5f6f7;
-  border-radius: 3px;
 }
 
 .border-light {
@@ -225,9 +171,7 @@ h4.card-title {
 
 .publisher {
   position: relative;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   padding: 12px 20px;
   background-color: #f9fafb;
@@ -242,7 +186,6 @@ h4.card-title {
 }
 
 .publisher-input {
-  -webkit-box-flex: 1;
   flex-grow: 1;
   border: none;
   outline: none !important;
@@ -264,25 +207,12 @@ textarea {
   color: #8b95a5;
   font-size: 16px;
   cursor: pointer;
-  overflow: -moz-hidden-unscrollable;
-  -webkit-transition: 0.2s linear;
   transition: 0.2s linear;
 }
 
 .file-group {
   position: relative;
   overflow: hidden;
-}
-
-.publisher-btn {
-  background-color: transparent;
-  border: none;
-  color: #cac7c7;
-  font-size: 16px;
-  cursor: pointer;
-  overflow: -moz-hidden-unscrollable;
-  -webkit-transition: 0.2s linear;
-  transition: 0.2s linear;
 }
 
 .file-group input[type="file"] {
@@ -294,4 +224,110 @@ textarea {
 
 .text-info {
   color: #48b0f7 !important;
+}
+
+/* Estilos para as mensagens */
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px; /* Reduza a margem inferior para diminuir a altura */
+}
+
+.message .content {
+  max-width: 70%;
+  padding: 10px; /* Reduza o padding para diminuir a altura */
+  border-radius: 10px;
+  font-size: 14px; /* Reduza o tamanho da fonte para diminuir a altura */
+  line-height: 1.5;
+}
+
+.message.sent .content {
+  background-color: #FF4400;
+  color: white;
+  margin-left: 10px;
+}
+
+.message.received .content {
+  background-color: #f1f1f1;
+  color: #333;
+  margin-right: 10px;
+}
+
+.message .profile-pic {
+  width: 30px; /* Reduza o tamanho da imagem para diminuir a altura */
+  height: 30px; /* Reduza o tamanho da imagem para diminuir a altura */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Estilos para as informações do usuário */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.user-image {
+  width: 60px; /* Reduza o tamanho da imagem para diminuir a altura */
+  height: 60px; /* Reduza o tamanho da imagem para diminuir a altura */
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-name {
+  font-size: 20px; /* Reduza o tamanho da fonte para diminuir a altura */
+  margin: 0;
+}
+
+.user-style {
+  font-size: 16px; /* Reduza o tamanho da fonte para diminuir a altura */
+  color: #666;
+  margin: 5px 0 0 0;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 14px; /* Reduza o tamanho da fonte para diminuir a altura */
+}
+
+/* Responsividade e espaçamento para garantir que os contêineres não encostem na nav e no footer */
+.bordadaora {
+  border: 1px solid #ccc;
+  padding: 5px; /* Reduza o padding para diminuir a altura */
+  margin: 0; /* Remova as margens */
+  box-sizing: border-box;
+  flex: 1;
+  max-width: 45%;
+}
+
+@media (max-width: 768px) {
+  .bordadaora {
+    margin: 10px;
+    max-width: 100%;
+  }
+}
+
+/* Estilos para o contêiner principal */
+.user-chat-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  margin-top: 130px; /* Aumente o margin-top para empurrar o conteúdo para baixo da navbar */
+}
+
+.chat-container {
+  flex: 1;
+  margin-left: 10px; /* Reduza a margem esquerda para aproximar os contêineres */
 }

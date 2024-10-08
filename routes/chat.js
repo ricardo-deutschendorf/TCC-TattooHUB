@@ -95,22 +95,16 @@ router.get("/buscamensagens", async function (req, res) {
     const retorno = mensagens.map((dados) => {
       if (usuario_logado == dados.enviou_id) {
         return `
-          <div class='media media-chat media-chat-reverse'>
-            <img class='avatar' src='/imagens/${req.session.passport.user.imagem}'>
-            <div class='media-body'>
-              <p>${dados.mensagem}</p>
-            </div>
-          </div>
-          <div class='media media-meta-day'></div>`;
+          <div class='message sent'>
+            <img src='/imagens/${req.session.passport.user.imagem}' alt='Foto de perfil' class='profile-pic' />
+            <div class='content'>${dados.mensagem}</div>
+          </div>`;
       } else {
         return `
-          <div class='media media-chat'>
-            <img class='avatar' src='/imagens/${foto_amigo}'>
-            <div class='media-body'>
-              <p>${dados.mensagem}</p>
-            </div>
-          </div>
-          <div class='media media-meta-day'></div>`;
+          <div class='message received'>
+            <img src='/imagens/${foto_amigo}' alt='Foto de perfil' class='profile-pic' />
+            <div class='content'>${dados.mensagem}</div>
+          </div>`;
       }
     }).join("");
 
