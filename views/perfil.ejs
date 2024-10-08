@@ -25,9 +25,14 @@
             <% } %>
           <% } else { %>
             <%= usuario.descricao %>
-          <% } %>
+            <% } %>
+          </div>
         </div>
-      </div>
+        <form id="descricao-form">
+          <textarea name="descricao" placeholder="Atualize sua descrição"></textarea>
+          <input type="hidden" name="usuarioId" value="<%= usuario.id %>">
+          <button type="submit">Atualizar</button>
+        </form>
 
       <!-- Seção de comentários -->
       <div id="comments-section" class="comments-section">
@@ -52,3 +57,69 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Atualizar descrição do perfil via AJAX
+    const descricaoForm = document.getElementById('descricao-form');
+    if (descricaoForm) {
+      descricaoForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const descricao = descricaoForm.querySelector('textarea[name="descricao"]').value;
+        const usuarioId = descricaoForm.querySelector('input[name="usuarioId"]').value;
+
+        fetch(`/perfil/${usuarioId}/descricao`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ descricao }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            document.getElementById('descricao-texto').innerText = data.descricao;
+          }
+        })
+        .catch(error => console.error('Erro ao atualizar a descrição:', error));
+      });
+    }
+
+    // Adicionar comentário via AJAX
+    const comentarioForm = document.getElementById('comentario-form');
+    if (comentarioForm) {
+      comentarioForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(comentarioForm);
+        const comentarioData = {
+          usuarioNome: formData.get('usuarioNome'),
+          texto: formData.get('texto'),
+          usuarioId: formData.get('usuarioId'),
+        };
+
+        fetch('/comentarios/adicionar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(comentarioData),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            const comentarioItem = document.createElement('li');
+            comentarioItem.classList.add('comentario-item');
+            comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
+            document.getElementById('comentarios-list').appendChild(comentarioItem);
+            comentarioForm.reset();
+          }
+        })
+        .catch(error => console.error('Erro ao adicionar o comentário:', error));
+      });
+    }
+  });
+</script>
