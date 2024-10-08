@@ -1,125 +1,164 @@
 <!-- views/perfil.ejs -->
-<section>
-  <div class="padding chat-card centralized content">
-    <div class="bordadaora tamanhodasinfo">
-      <!-- Seção de informações do usuário -->
-      <div class="left-aligned">
-        <img class="fotodolado" src="/imagens/<%= usuario.imagem %>">
-        <h1><%= usuario.nome_artistico %></h1> <!-- Nome artístico do tatuador -->
-        <h6><%= usuario.nome %></h6> <!-- Nome do tatuador -->
-      </div>
-      <div>
-        <strong>Estilo de arte:</strong>
-        <p><%= usuario.estilo %></p>
-      </div>
-
-      <!-- Seção de descrição -->
-      <div class="description-section">
-        <h5>Descrição</h5>
-        <div id="descricao-texto" class="descricao-texto">
-          <% if (!usuario.descricao) { %>
-            <% if (usuario.tipo === 'cliente') { %>
-              <p>Você é um cliente! 😉</p>
-            <% } else { %>
-              <p>Esse usuário ainda não tem uma descrição 😥</p>
-            <% } %>
-          <% } else { %>
-            <%= usuario.descricao %>
-            <% } %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Tatuador</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <section>
+    <div class="padding chat-card centralized content">
+      <div class="bordadaora tamanhodasinfo">
+        <!-- Seção de informações do usuário -->
+        <div class="perfil-info">
+          <img class="fotodolado" src="/imagens/<%= usuario.imagem %>">
+          <div class="info-text">
+            <h1 class="nome-artistico"><%= usuario.nome_artistico %></h1> <!-- Nome artístico do tatuador -->
+            <h6 class="nome-tatuador"><%= usuario.nome %></h6> <!-- Nome do tatuador -->
+            <p class="estilo-tatuador"><strong>Estilo de arte:</strong> <%= usuario.estilo %></p>
           </div>
         </div>
-        <form id="descricao-form">
-          <textarea name="descricao" placeholder="Atualize sua descrição"></textarea>
-          <input type="hidden" name="usuarioId" value="<%= usuario.id %>">
-          <button type="submit">Atualizar</button>
-        </form>
 
-      <!-- Seção de comentários -->
-      <div id="comments-section" class="comments-section">
-        <h5>Comentários</h5>
-        <ul id="comentarios-list" class="comentarios-list">
-          <!-- Itera sobre a lista de comentários e exibe cada um -->
-          <% comentarios.forEach(function(comentario) { %>
-            <li class="comentario-item">
-              <strong><%= comentario.usuarioNome %>:</strong>
-              <p><%= comentario.texto %></p>
-            </li>
-          <% }); %>
-        </ul>
-        <!-- Formulário para adicionar um novo comentário -->
-        <form id="comentario-form">
-          <textarea name="texto" placeholder="Adicione um comentário"></textarea>
-          <input type="hidden" name="usuarioNome" value="<%= usuarioLogado.nome %>"> <!-- Nome do usuário logado -->
-          <input type="hidden" name="usuarioId" value="<%= usuario.id %>"> <!-- ID do tatuador -->
-          <button type="submit">Enviar</button>
-        </form>
+        <!-- Seção de descrição -->
+        <div class="description-section">
+          <h5>Descrição</h5>
+          <div id="descricao-texto" class="descricao-texto">
+            <% if (!usuario.descricao) { %>
+              <% if (usuario.tipo === 'cliente') { %>
+                <p>Você é um cliente! 😉</p>
+              <% } else { %>
+                <p>Esse usuário ainda não tem uma descrição 😥</p>
+              <% } %>
+            <% } else { %>
+              <%= usuario.descricao %>
+            <% } %>
+          </div>
+          <% if (usuarioLogado.id === usuario.id) { %>
+            <button id="editar-descricao-btn" class="alterar-descricao-btn">Alterar Descrição</button>
+            <form id="descricao-form" style="display: none;">
+              <textarea id="descricao-textarea" name="descricao" placeholder="Atualize sua descrição"></textarea>
+              <input type="hidden" name="usuarioId" value="<%= usuario.id %>">
+              <button type="submit" class="alterar-descricao-btn">Alterar Descrição</button>
+            </form>
+          <% } %>
+        </div>
+
+        <!-- Seção de comentários -->
+        <div id="comments-section" class="comments-section">
+          <h5>Comentários</h5>
+          <ul id="comentarios-list" class="comentarios-list">
+            <!-- Verifica se há comentários -->
+            <% if (comentarios.length === 0) { %>
+              <li class="comentario-item">
+                <p>Esse usuário ainda não tem comentários 😥</p>
+              </li>
+            <% } else { %>
+              <!-- Itera sobre a lista de comentários e exibe cada um -->
+              <% comentarios.forEach(function(comentario) { %>
+                <li class="comentario-item">
+                  <strong><%= comentario.usuarioNome %>:</strong>
+                  <p><%= comentario.texto %></p>
+                </li>
+              <% }); %>
+            <% } %>
+          </ul>
+          <% if (usuarioLogado.id !== usuario.id) { %>
+            <!-- Formulário para adicionar um novo comentário -->
+            <form id="comentario-form" class="comentario-form">
+              <textarea name="texto" placeholder="Adicione um comentário"></textarea>
+              <input type="hidden" name="usuarioNome" value="<%= usuarioLogado.nome %>"> <!-- Nome do usuário logado -->
+              <input type="hidden" name="usuarioId" value="<%= usuario.id %>"> <!-- ID do tatuador -->
+              <button type="submit" class="alterar-descricao-btn">Enviar</button>
+            </form>
+          <% } %>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Atualizar descrição do perfil via AJAX
-    const descricaoForm = document.getElementById('descricao-form');
-    if (descricaoForm) {
-      descricaoForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const descricao = descricaoForm.querySelector('textarea[name="descricao"]').value;
-        const usuarioId = descricaoForm.querySelector('input[name="usuarioId"]').value;
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Mostrar formulário de edição de descrição ao clicar no botão "Alterar Descrição"
+      const editarDescricaoBtn = document.getElementById('editar-descricao-btn');
+      const descricaoForm = document.getElementById('descricao-form');
+      if (editarDescricaoBtn) {
+        editarDescricaoBtn.addEventListener('click', function () {
+          descricaoForm.style.display = 'block';
+          editarDescricaoBtn.style.display = 'none';
+        });
+      }
 
-        fetch(`/perfil/${usuarioId}/descricao`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ descricao }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            document.getElementById('descricao-texto').innerText = data.descricao;
+      // Atualizar descrição do perfil via AJAX
+      if (descricaoForm) {
+        descricaoForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const descricaoTextarea = document.getElementById('descricao-textarea');
+          const descricao = descricaoTextarea.value.trim();
+          const usuarioId = descricaoForm.querySelector('input[name="usuarioId"]').value;
+
+          if (descricao === '') {
+            alert('A descrição não pode estar vazia.');
+            return;
           }
-        })
-        .catch(error => console.error('Erro ao atualizar a descrição:', error));
-      });
-    }
 
-    // Adicionar comentário via AJAX
-    const comentarioForm = document.getElementById('comentario-form');
-    if (comentarioForm) {
-      comentarioForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(comentarioForm);
-        const comentarioData = {
-          usuarioNome: formData.get('usuarioNome'),
-          texto: formData.get('texto'),
-          usuarioId: formData.get('usuarioId'),
-        };
+          fetch(`/perfil/${usuarioId}/descricao`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ descricao }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              alert(data.error);
+            } else {
+              document.getElementById('descricao-texto').innerText = data.descricao;
+              descricaoForm.style.display = 'none';
+              editarDescricaoBtn.style.display = 'block';
+            }
+          })
+          .catch(error => console.error('Erro ao atualizar a descrição:', error));
+        });
+      }
 
-        fetch('/comentarios/adicionar', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(comentarioData),
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            const comentarioItem = document.createElement('li');
-            comentarioItem.classList.add('comentario-item');
-            comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
-            document.getElementById('comentarios-list').appendChild(comentarioItem);
-            comentarioForm.reset();
-          }
-        })
-        .catch(error => console.error('Erro ao adicionar o comentário:', error));
-      });
-    }
-  });
-</script>
+      // Adicionar comentário via AJAX
+      const comentarioForm = document.getElementById('comentario-form');
+      if (comentarioForm) {
+        comentarioForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const formData = new FormData(comentarioForm);
+          const comentarioData = {
+            usuarioNome: formData.get('usuarioNome'),
+            texto: formData.get('texto'),
+            usuarioId: formData.get('usuarioId'),
+          };
+
+          fetch('/comentarios/adicionar', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(comentarioData),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              alert(data.error);
+            } else {
+              const comentarioItem = document.createElement('li');
+              comentarioItem.classList.add('comentario-item');
+              comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
+              document.getElementById('comentarios-list').appendChild(comentarioItem);
+              comentarioForm.reset();
+            }
+          })
+          .catch(error => console.error('Erro ao adicionar o comentário:', error));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,45 +1,187 @@
+/* Estilos para a seção de informações do perfil */
+.perfil-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Ajuste conforme necessário */
+}
 
+.fotodolado {
+    width: 150px;
+    /* Ajuste conforme necessário */
+    height: 150px;
+    border-radius: 50%;
+    /* Torna a imagem redonda */
+    object-fit: cover;
+    /* Faz a imagem cobrir o espaço */
+    margin-right: 20px;
+    /* Espaço entre a imagem e o texto */
+}
+
+.info-text {
+    text-align: center;
+    /* Centraliza o texto */
+}
+
+.nome-artistico {
+    font-size: 36px;
+    /* Tamanho da fonte */
+    font-family: 'Arial', sans-serif;
+    /* Fonte */
+    font-weight: bold;
+    /* Negrito */
+    color: #FF4400;
+    /* Cor */
+    margin: 0;
+    /* Remove margem */
+}
+
+.nome-tatuador {
+    font-size: 24px;
+    /* Tamanho da fonte */
+    font-family: 'Arial', sans-serif;
+    /* Fonte */
+    color: #333;
+    /* Cor */
+    margin: 5px 0;
+    /* Margem */
+}
+
+.estilo-tatuador {
+    font-size: 18px;
+    /* Tamanho da fonte */
+    font-family: 'Arial', sans-serif;
+    /* Fonte */
+    color: #666;
+    /* Cor */
+    margin: 5px 0;
+    /* Margem */
+}
+
+/* Estilos para o botão "Alterar Descrição" */
+.alterar-descricao-btn,
+#descricao-form button,
+.botaozika {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #FF4400;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px #000;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    /* Espaço adicional acima do botão */
+}
+
+.alterar-descricao-btn:hover,
+#descricao-form button:hover,
+.botaozika:hover {
+    background-color: #fff;
+    color: #FF4400;
+    border: 2px solid #FF4400;
+    box-shadow: 5px 5px 0px #FF4400;
+}
+
+/* Estilos para a descrição com barra de rolagem */
+.descricao-texto {
+    max-height: 100px;
+    /* Ajuste conforme necessário */
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    /* Espaço adicional abaixo da descrição */
+}
+
+/* Estilos para o botão de enviar descrição */
+.enviar-descricao-btn {
+    margin-top: 10px;
+    /* Espaço entre o botão e o textarea */
+    float: right;
+    /* Posiciona o botão à direita */
+    clear: both;
+    /* Garante que o botão fique na linha correta */
+    display: block;
+    /* Garante que o botão ocupe toda a largura disponível */
+}
+
+/* Estilos para a seção de comentários */
+.comments-section {
+    margin-top: 20px;
+    /* Espaço adicional acima da seção de comentários */
+}
+
+.comentarios-list {
+    list-style-type: none;
+    /* Remove marcadores da lista */
+    padding: 0;
+    /* Remove padding padrão */
+    margin: 0;
+    /* Remove margem padrão */
+    max-height: 200px;
+    /* Define a altura máxima */
+    overflow-y: auto;
+    /* Adiciona barra de rolagem vertical */
+}
+
+.comentario-item {
+    background-color: #f9f9f9;
+    /* Cor de fundo dos comentários */
+    border: 1px solid #ddd;
+    /* Borda dos comentários */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    padding: 10px;
+    /* Espaçamento interno */
+    margin-bottom: 10px;
+    /* Espaçamento entre os comentários */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra para dar profundidade */
+}
+
+.comentario-item strong {
+    color: #333;
+    /* Cor do nome do usuário */
+    font-weight: bold;
+    /* Negrito para o nome do usuário */
+}
+
+.comentario-item p {
+    margin: 5px 0 0 0;
+    /* Margem para o texto do comentário */
+    color: #555;
+    /* Cor do texto do comentário */
+}
+
+/* Estilos para o card */
 .card2 {
     transition: transform 0.3s ease, background-color 0.3s ease;
-    position: relative; /* Garante que o card seja o contexto do botão */
+    position: relative;
+    /* Garante que o card seja o contexto do botão */
 }
 
 .card2:hover {
     transform: scale(1.05);
 }
 
-
 #profile-image {
-    width: 40px; /* Ajuste o tamanho conforme necessário */
+    width: 40px;
+    /* Ajuste o tamanho conforme necessário */
     height: 40px;
-    border-radius: 50%; /* Torna a imagem redonda */
-    object-fit: cover; /* Faz a imagem cobrir o espaço */
+    border-radius: 50%;
+    /* Torna a imagem redonda */
+    object-fit: cover;
+    /* Faz a imagem cobrir o espaço */
 }
 
-.botaozika {
-    display: inline-block;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  background-color: #FF4400;
-  border: 2px solid #000;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0px #000;
-  transition: all 0.3s ease;
-}
-
-.botaozika:hover {
-    background-color: #fff;
-    color: #FF4400;
-    border: 2px solid #FF4400;
-    box-shadow:  5px, 5px, 0px #FF4400;
-}
-
-
-.alinharbotaocard{
+.alinharbotaocard {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,177 +189,202 @@
 }
 
 .estilotatuad {
-    border-radius: 15px; /* Bordas arredondadas */
+    border-radius: 15px;
+    /* Bordas arredondadas */
     text-align: center;
     font-size: 22px;
     font-family: serif;
-    border: 1px solid #ccc; /* Borda opcional */
+    border: 1px solid #ccc;
+    /* Borda opcional */
 }
+
 .quadrado-container {
-    height: 100vh; /* Ocupa a altura total da tela */
-    padding: 20px; /* Espaço interno para não encostar nas bordas */
+    height: 100vh;
+    /* Ocupa a altura total da tela */
+    padding: 20px;
+    /* Espaço interno para não encostar nas bordas */
 }
 
 .quadrado {
-    border-radius: 15px; /* Bordas arredondadas */
-    border: 1px solid #ccc; /* Borda opcional */
+    border-radius: 15px;
+    /* Bordas arredondadas */
+    border: 1px solid #ccc;
+    /* Borda opcional */
 }
 
 .titulopika {
     font-size: 60px;
     font-family: sans-serif;
-    text-decoration:underline;
+    text-decoration: underline;
 }
-
 
 .botaomaiszika {
     position: absolute;
-    top: 10px; /* Mantém o botão no topo */
-    right: 10px; /* Mantém o botão à direita */
+    top: 10px;
+    /* Mantém o botão no topo */
+    right: 10px;
+    /* Mantém o botão à direita */
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    z-index: 10; /* Garante que o botão fique acima de outros elementos */
+    z-index: 10;
+    /* Garante que o botão fique acima de outros elementos */
     border: 2px solid #FF4400;
     color: #000;
     box-shadow: 0 4px 8px rgba(0.1, 0.2, 0.3, 0.4);
 }
 
 .conteiner {
-    position: relative; /* Torna o contêiner referência para o posicionamento absoluto */
+    position: relative;
+    /* Torna o contêiner referência para o posicionamento absoluto */
 }
 
 .centralized {
-    display: flex;               /* Usar Flexbox para layout */
-    justify-content: center;     /* Centraliza horizontalmente */
-    align-items: center;         /* Centraliza verticalmente */
-    height: 100vh;              /* Ocupa toda a altura da tela */
-    background-color: #f0f0f0;  /* Cor de fundo da página */
+    display: flex;
+    /* Usar Flexbox para layout */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
+    height: 100vh;
+    /* Ocupa toda a altura da tela */
+    background-color: #f0f0f0;
+    /* Cor de fundo da página */
 }
 
 .content {
-    background-color: #ffffff;       /* Cor de fundo da div */
-    padding: 20px;                   /* Espaçamento interno */
-    border-radius: 15px;             /* Bordas arredondadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    text-align: left;            /* Centraliza o texto dentro da div */
+    background-color: #ffffff;
+    /* Cor de fundo da div */
+    padding: 20px;
+    /* Espaçamento interno */
+    border-radius: 15px;
+    /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    text-align: left;
+    /* Centraliza o texto dentro da div */
 }
+
 .small-div {
-    display: flex;                  /* Usar Flexbox para layout */
-    align-items: center;            /* Alinha verticalmente os itens ao centro */
-    width: 300px;                   /* Define uma largura fixa */
-    padding: 10px;                  /* Adiciona espaçamento interno */
-    background-color: #e0e0e0;      /* Cor de fundo para visibilidade */
-    border: 1px solid #ccc;         /* Borda opcional para melhor visibilidade */
-    border-radius: 5px;             /* Bordas arredondadas */
+    display: flex;
+    /* Usar Flexbox para layout */
+    align-items: center;
+    /* Alinha verticalmente os itens ao centro */
+    width: 300px;
+    /* Define uma largura fixa */
+    padding: 10px;
+    /* Adiciona espaçamento interno */
+    background-color: #e0e0e0;
+    /* Cor de fundo para visibilidade */
+    border: 1px solid #ccc;
+    /* Borda opcional para melhor visibilidade */
+    border-radius: 5px;
+    /* Bordas arredondadas */
 }
 
 .imgdaora {
-    width: 50px;                    /* Define uma largura fixa */
-    height: 40px;                   /* Define uma altura fixa */
-    background-color: #e0e0e0;      /* Cor de fundo para visibilidade */
-    border: 1px solid #ccc;         /* Borda opcional para melhor visibilidade */
-    border-radius: 20px;            /* Bordas arredondadas */
-    margin-right: 10px;             /* Espaço entre a imagem e o texto */
+    width: 50px;
+    /* Define uma largura fixa */
+    height: 40px;
+    /* Define uma altura fixa */
+    background-color: #e0e0e0;
+    /* Cor de fundo para visibilidade */
+    border: 1px solid #ccc;
+    /* Borda opcional para melhor visibilidade */
+    border-radius: 20px;
+    /* Bordas arredondadas */
+    margin-right: 10px;
+    /* Espaço entre a imagem e o texto */
 }
 
-.chataqui{
-    background-color: #333333
+.chataqui {
+    background-color: #333333;
 }
 
-.chatacima{
+.chatacima {
     font-size: 30px;
     font-family: sans-serif;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 .left-aligned {
-    display: flex;                /* Usar Flexbox para layout */
-    justify-content: flex-start;  /* Alinha o conteúdo à esquerda */
-    align-items: flex-start;      /* Alinha os itens no topo */
-    
-}
-.fotodolado {
-    width: 320px; /* Largura */
-    height: 200px; /* Altura igual à largura para ser quadrada */
-    border-radius: 10%; /* Arredondar levemente os cantos, se desejar */
-    object-fit: cover; /* Faz a imagem cobrir o espaço */
-    border: 2px solid #ccc; /* Borda opcional */
-    margin-bottom: 10px; /* Espaçamento abaixo da imagem */
+    display: flex;
+    /* Usar Flexbox para layout */
+    flex-direction: column;
+    /* Coloca os itens em coluna */
+    align-items: center;
+    /* Centraliza o conteúdo horizontalmente */
 }
 
-.left-aligned{
-    display: flex;               /* Usar Flexbox para layout */
-    flex-direction: column;      /* Coloca os itens em coluna */
-    align-items: center;         /* Centraliza o conteúdo horizontalmente */
-}
-
-  .bordadaora {
+.bordadaora {
     border: 3px solid #FF4400;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 4, 8, 12);
-  }
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 4, 8, 12);
+}
 
- .textolinha {
+.textolinha {
     text-decoration: underline;
- }
+}
 
- .tamanhodasinfo {
-    width: 40%; /* Aumenta a largura para 80% da largura do contêiner */
-    height: 90vh; /* Define a altura para 400px */
+.tamanhodasinfo {
+    width: 40%;
+    /* Aumenta a largura para 80% da largura do contêiner */
+    height: 90vh;
+    /* Define a altura para 400px */
     margin-bottom: 1%;
     margin-top: 4.5%;
- }
- .tamanhochat{
+}
+
+.tamanhochat {
     width: 60%;
     height: 90vh;
     margin-top: 4.5%;
     margin-bottom: 1%;
- }
+}
 
- .tamanhocard{
+.tamanhocard {
     margin-right: 15%;
- }
+}
 
- .tamanhoconversa{
+.tamanhoconversa {
     width: 100%;
- }
+}
 
- .headerchat{
+.headerchat {
     text-align: center;
- }
+}
 
- .chatinteiro{
-    border-radius: 15px
- }
+.chatinteiro {
+    border-radius: 15px;
+}
 
- .botaomaluco{
-  position: relative;
-  display: block;
-  width: 200px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: #FF4400;
-  border: solid 1px transparent;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 300; 
-  cursor: pointer;
- }
- 
- .naotemtatuador{
+.botaomaluco {
+    position: relative;
+    display: block;
+    width: 200px;
+    height: 36px;
+    border-radius: 18px;
+    background-color: #FF4400;
+    border: solid 1px transparent;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.naotemtatuador {
     text-align: center;
     font-size: 22px;
- }
+}
 
- .emoji{
+.emoji {
     text-align: center;
     font-size: 40px;
- }
+}
 
- /* tatuador.css */
+/* tatuador.css */
 .description-section {
     margin-top: 20px;
 }
@@ -244,95 +411,38 @@
     border-radius: 5px;
 }
 
-#descricao-form button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #FF4400;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px #000;
-    transition: all 0.3s ease;
-    float: right; /* Posiciona o botão à direita */
-    margin-top: 10px; /* Espaço adicional acima do botão */
-}
-
-#descricao-form button:hover {
-    background-color: #fff;
-    color: #FF4400;
-    border: 2px solid #FF4400;
-    box-shadow: 5px 5px 0px #FF4400;
-}
-
-/* Adiciona estilos para o botão "Alterar Descrição" */
-.alterar-descricao-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #FF4400;
-    border: 2px solid #000;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0px #000;
-    transition: all 0.3s ease;
-    float: right; /* Posiciona o botão à direita */
-    margin-top: 10px; /* Espaço adicional acima do botão */
-}
-
-/* Adiciona estilos para a descrição com barra de rolagem */
-.descricao-texto {
-    max-height: 100px; /* Ajuste conforme necessário */
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    margin-bottom: 20px; /* Espaço adicional abaixo da descrição */
-}
-
-/* Estilos para o botão de enviar descrição */
-.enviar-descricao-btn {
-    margin-top: 10px; /* Espaço entre o botão e o textarea */
-    float: right; /* Posiciona o botão à direita */
-    clear: both; /* Garante que o botão fique na linha correta */
-    display: block; /* Garante que o botão ocupe toda a largura disponível */
-}
-
-/* Estilos para a seção de comentários */
-.comments-section {
-    margin-top: 20px; /* Espaço adicional acima da seção de comentários */
-}
-
-.comentarios-list {
-    list-style-type: none; /* Remove marcadores da lista */
-    padding: 0; /* Remove padding padrão */
-    margin: 0; /* Remove margem padrão */
-    max-height: 100px; /* Define a altura máxima */
-    overflow-y: auto; /* Adiciona barra de rolagem vertical */
-}
-
 .comentario-item {
-    background-color: #f9f9f9; /* Cor de fundo dos comentários */
-    border: 1px solid #ddd; /* Borda dos comentários */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 10px; /* Espaçamento interno */
-    margin-bottom: 10px; /* Espaçamento entre os comentários */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+    margin-bottom: 10px;
 }
 
-.comentario-item strong {
-    color: #333; /* Cor do nome do usuário */
-    font-weight: bold; /* Negrito para o nome do usuário */
+.alterar-descricao-btn {
+    margin-top: 10px;
 }
 
-.comentario-item p {
-    margin: 5px 0 0 0; /* Margem para o texto do comentário */
-    color: #555; /* Cor do texto do comentário */
+.comentario-form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comentario-form textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+  margin-right: 10px;
+}
+
+.enviar-comentario-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.enviar-comentario-btn:hover {
+  background-color: #0056b3;
 }

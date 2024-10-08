@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
-<body>
-  <div class="site-header section-padding d-flex justify-content-center align-items-center">
+
+
+<div class="site-header section-padding d-flex justify-content-center align-items-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-12">
@@ -18,61 +11,60 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
 
-  <section class="featured-product section-padding">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center">
+
+<section class="featured-product section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+      </div>
+
+      <% if (tatuadores.length === 0) { %>
+        <p class="naotemtatuador">Não há tatuadores disponíveis no momento.</p>
+        <p class="emoji">😥</p>
+      <% } %>
+      <% for (let i = 0; i < tatuadores.length; i++) { %>
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
+          <div class="card bordadaora" style="width: 18rem;">
+            <div class="conteiner">
+              <form method="POST" action="/tatuador/apagar/<%= tatuadores[i].id %>">
+                <% if (id === tatuadores[i].id) { %>
+                  <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
+                <% } %>
+                <img src="/imagens/<%= tatuadores[i].imagem %>" class="card-img-top" alt="...">
+              </form>
             </div>
-
-            <% if (tatuadores.length === 0) { %>
-                <p class="naotemtatuador">Não há tatuadores disponíveis no momento.</p>
-                <p class="emoji">😥</p>
-            <% } %>
-            <% for (let i = 0; i < tatuadores.length; i++) { %>
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-3 d-flex justify-content-center">
-                    <div class="card bordadaora" style="width: 18rem;">
-                        <div class="conteiner">
-                            <form method="POST" action="/tatuador/apagar/<%= tatuadores[i].id %>">
-                                <% if (id === tatuadores[i].id) { %>
-                                    <button type="submit" class="botaomaiszika"><i class="fas fa-trash-alt"></i></button>
-                                <% } %>
-                                <img src="/imagens/<%= tatuadores[i].imagem %>" class="card-img-top" alt="...">
-                            </form>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title textolinha">
-                                <%= tatuadores[i].nome_artistico %>
-                            </h5>
-                            <p class="card-text">
-                                <%= tatuadores[i].estudio %>
-                            </p>
-                        </div>
-                        <div class="quadrado">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item estilotatuad">
-                                    <p>Estilo de arte:</p>
-                                    <%= tatuadores[i].estilo %>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body alinharbotaocard">
-                            <form method="GET" action="/perfil/<%= tatuadores[i].id %>">
-                                <button type="submit" class="card-link botaozika">Perfil</button>
-                            </form>
-                            <% if (tatuadores[i].id !== usuario.id) { %>
-                                <form method="POST" action="/chat">
-                                    <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
-                                    <button type="submit" class="botaozika">Chat</button>
-                                </form>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
+            <div class="card-body">
+              <h5 class="card-title textolinha">
+                <%= tatuadores[i].nome_artistico %>
+              </h5>
+              <p class="card-text">
+                <%= tatuadores[i].estudio %>
+              </p>
+            </div>
+            <div class="quadrado">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item estilotatuad">
+                  <p>Estilo de arte:</p>
+                  <%= tatuadores[i].estilo %>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body alinharbotaocard">
+              <form method="GET" action="/perfil/<%= tatuadores[i].id %>">
+                <button type="submit" class="card-link botaozika">Perfil</button>
+              </form>
+              <% if (tatuadores[i].id !== usuario.id) { %>
+                <form method="POST" action="/chat">
+                  <input type="hidden" name="idUser" value="<%= tatuadores[i].id %>" />
+                  <button type="submit" class="botaozika">Chat</button>
+                </form>
+              <% } %>
+            </div>
+          </div>
         </div>
+      <% } %>
     </div>
-  </section>
-</body>
-</html>
+  </div>
+</section>
