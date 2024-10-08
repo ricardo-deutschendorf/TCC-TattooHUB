@@ -16,6 +16,7 @@ const Usuario = database.define("usuario", {
   estudio: { type: Sequelize.STRING, allowNull: true },
   nome_artistico: { type: Sequelize.STRING, allowNull: true },
   estilo: { type: Sequelize.STRING, allowNull: true },
+  descricao: { type: Sequelize.STRING, allowNull: true }, // Adicione este campo
 }, {
   timestamps: false
 });

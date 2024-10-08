@@ -4,22 +4,38 @@
     <div class="bordadaora tamanhodasinfo">
       <!-- Seção de informações do usuário -->
       <div class="left-aligned">
-        <img class="fotodolado" src="/imagens/<%= imagem %>">
-        <h1><%= nome_artistico %></h1> <!-- Nome artístico do tatuador -->
-        <h6><%= usuarioNome %></h6> <!-- Nome do tatuador -->
+        <img class="fotodolado" src="/imagens/<%= usuario.imagem %>">
+        <h1><%= usuario.nome_artistico %></h1> <!-- Nome artístico do tatuador -->
+        <h6><%= usuario.nome %></h6> <!-- Nome do tatuador -->
       </div>
       <div>
         <strong>Estilo de arte:</strong>
-        <p><%= estilo %></p>
+        <p><%= usuario.estilo %></p>
+      </div>
+
+      <!-- Seção de descrição -->
+      <div class="description-section">
+        <h5>Descrição</h5>
+        <div id="descricao-texto" class="descricao-texto">
+          <% if (!usuario.descricao) { %>
+            <% if (usuario.tipo === 'cliente') { %>
+              <p>Você é um cliente! 😉</p>
+            <% } else { %>
+              <p>Esse usuário ainda não tem uma descrição 😥</p>
+            <% } %>
+          <% } else { %>
+            <%= usuario.descricao %>
+          <% } %>
+        </div>
       </div>
 
       <!-- Seção de comentários -->
-      <div class="comments-section">
+      <div id="comments-section" class="comments-section">
         <h5>Comentários</h5>
-        <ul id="comentarios-list" style="max-height: 100px; overflow-y: scroll;">
+        <ul id="comentarios-list" class="comentarios-list">
           <!-- Itera sobre a lista de comentários e exibe cada um -->
           <% comentarios.forEach(function(comentario) { %>
-            <li>
+            <li class="comentario-item">
               <strong><%= comentario.usuarioNome %>:</strong>
               <p><%= comentario.texto %></p>
             </li>
@@ -36,34 +52,3 @@
     </div>
   </div>
 </section>
-
-<script>
-// Adiciona um listener para o evento de submit do formulário
-document.getElementById('comentario-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Previne o comportamento padrão do formulário
-
-  // Coleta os dados do formulário
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-  console.log(`Dados do formulário: ${JSON.stringify(data)}`); // Log para verificar os dados do formulário
-
-  // Envia os dados do formulário via AJAX
-  fetch('/comentarios/adicionar', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json()) // Converte a resposta para JSON
-  .then(comentario => {
-    // Adiciona o novo comentário logo acima do textarea
-    const comentariosList = document.getElementById('comentarios-list');
-    const newComment = document.createElement('li');
-    newComment.innerHTML = `<strong>${comentario.usuarioNome}:</strong><p>${comentario.texto}</p>`;
-    comentariosList.insertBefore(newComment, comentariosList.firstChild);
-    this.reset(); // Reseta o formulário
-  })
-  .catch(error => console.error('Erro ao adicionar o comentário:', error)); // Lida com erros
-});
-</script>
