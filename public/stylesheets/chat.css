@@ -1,10 +1,67 @@
+/* Reset de margens e paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Garantindo que o body ocupe 100% da largura e altura */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.user-chat-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 86vh; /* Ocupa 86% da altura da tela */
+  width: 100vw; /* Ocupa a largura total da tela */
+  margin: 7vh 0; /* Centraliza verticalmente */
+}
+
+.user-info {
+  flex: 0 0 35%; /* Ocupa 35% da largura da tela */
+  max-width: 35%; /* Garante que não ultrapasse 35% */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.chat-container {
+  flex: 1; /* Ocupa o restante da largura da tela */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .user-chat-container {
+    flex-direction: column; /* Alinha os itens em coluna */
+    margin: 7vh 0; /* Centraliza verticalmente */
+  }
+
+  .user-info {
+    width: 100%; /* Ocupa toda a largura disponível */
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .chat-container {
+    width: 100%; /* Ocupa toda a largura disponível */
+  }
+}
+
+/* Outros estilos existentes */
 .card-bordered {
   border: 1px solid #ebebeb;
 }
 
 .card {
   border: 0;
-  border-radius: 0px;
   margin-bottom: 30px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.03);
   transition: 0.5s;
@@ -20,6 +77,13 @@
 
 .card-header .card-title {
   border: none;
+}
+
+.description {
+  word-wrap: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
+  word-break: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
+  height: 150px; /* Define uma altura fixa para o contêiner */
+  overflow-y: auto; /* Adiciona um scroll vertical se o conteúdo exceder a altura */
 }
 
 h4.card-title {
@@ -88,7 +152,6 @@ h4.card-title {
   height: 36px;
   line-height: 36px;
   text-align: center;
-  border-radius: 100%;
   background-color: #f5f6f7;
   color: #8b95a5;
   text-transform: uppercase;
@@ -108,7 +171,6 @@ h4.card-title {
   padding: 6px 8px;
   margin: 4px 0;
   background-color: #f5f6f7;
-  border-radius: 3px;
   font-weight: 100;
   color: #9b9b9b;
 }
@@ -227,24 +289,15 @@ textarea {
 }
 
 /* Estilos para as mensagens */
+/* Estilos para as mensagens */
 .message {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px; /* Reduza a margem inferior para diminuir a altura */
+  margin-bottom: 10px;
 }
 
-.message .content {
-  max-width: 70%;
-  padding: 10px; /* Reduza o padding para diminuir a altura */
-  border-radius: 10px;
-  font-size: 14px; /* Reduza o tamanho da fonte para diminuir a altura */
-  line-height: 1.5;
-}
-
-.message.sent .content {
-  background-color: #FF4400;
-  color: white;
-  margin-left: 10px;
+.message.received {
+  flex-direction: row; /* Mantém a direção padrão para mensagens recebidas */
 }
 
 .message.received .content {
@@ -253,81 +306,84 @@ textarea {
   margin-right: 10px;
 }
 
-.message .profile-pic {
-  width: 30px; /* Reduza o tamanho da imagem para diminuir a altura */
-  height: 30px; /* Reduza o tamanho da imagem para diminuir a altura */
-  border-radius: 50%;
-  object-fit: cover;
+.message.sent .content {
+  background-color: #FF4400;
+  color: white;
+  margin-left: 10px;
 }
 
-/* Estilos para as informações do usuário */
+.message .content {
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 60%; /* Limita a largura máxima da mensagem */
+  word-wrap: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
+  word-break: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
+}
+
+
+.message .profile-pic {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%; /* Deixa a foto redonda */
+  margin: 0 10px; /* Adiciona margem para espaçamento */
+}
+
 .user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-  flex: 1;
+  flex: 0 0 300px;
+  margin: 0;
+  border-right: 1px solid #ccc;
+  height: calc(100vh - 130px);
+  top: 130px;
+  left: 0;
+  background-color: #fff;
+  z-index: 1000;
 }
 
 .user-image {
-  width: 60px; /* Reduza o tamanho da imagem para diminuir a altura */
-  height: 60px; /* Reduza o tamanho da imagem para diminuir a altura */
-  border-radius: 10px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .user-details {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .user-name {
-  font-size: 20px; /* Reduza o tamanho da fonte para diminuir a altura */
+  font-size: 20px;
   margin: 0;
 }
 
 .user-style {
-  font-size: 16px; /* Reduza o tamanho da fonte para diminuir a altura */
+  font-size: 16px;
   color: #666;
   margin: 5px 0 0 0;
 }
 
 .description {
   margin-top: 10px;
-  font-size: 14px; /* Reduza o tamanho da fonte para diminuir a altura */
+  font-size: 14px;
 }
 
-/* Responsividade e espaçamento para garantir que os contêineres não encostem na nav e no footer */
+/* Garantindo que os contêineres ocupem a tela inteira */
 .bordadaora {
   border: 1px solid #ccc;
-  padding: 5px; /* Reduza o padding para diminuir a altura */
-  margin: 0; /* Remova as margens */
+  padding: 5px;
+  margin: 0;
   box-sizing: border-box;
   flex: 1;
-  max-width: 45%;
+  width: 100%; /* Ocupa 100% da largura */
 }
 
 @media (max-width: 768px) {
   .bordadaora {
     margin: 10px;
-    max-width: 100%;
+    width: 100%;
   }
-}
-
-/* Estilos para o contêiner principal */
-.user-chat-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-  max-width: 1200px;
-  margin: 20px auto;
-  margin-top: 130px; /* Aumente o margin-top para empurrar o conteúdo para baixo da navbar */
-}
-
-.chat-container {
-  flex: 1;
-  margin-left: 10px; /* Reduza a margem esquerda para aproximar os contêineres */
 }

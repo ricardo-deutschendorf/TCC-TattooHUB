@@ -1,15 +1,11 @@
 <!doctype html>
 <html lang="pt-br">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>TattooHub</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,16 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMR+9S5FfXHygcA7G4sZ5B8A3T4HqEF6B7H2g" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/bootstrap-icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/stylesheets/slick.css" />
     <link rel="stylesheet" href="/stylesheets/tatuador.css" />
     <link href="/stylesheets/tattohub.css" rel="stylesheet">
-
 </head>
-
 <body>
     <section class="preloader">
         <div class="spinner">
@@ -41,19 +33,15 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <a class="navbar-brand" href="/">
                     <strong><span>Tattoo</span>Hub</strong>
                 </a>
-
                 <div class="d-lg-none">
                     <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
                     <a href="product-detail.html" class="bi-bag custom-icon"></a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-
                         <li class="nav-item">
                             <a class="nav-link" href="/tatuador">Tatuadores</a>
                         </li>
@@ -66,7 +54,6 @@
                             </li>
                         <% } %>
                     </ul>
-
                     <div class="d-none d-lg-block">
                         <% if (usuario && usuario.imagem) { %>
                             <a href="/perfil/<%= usuario.id %>">
@@ -76,7 +63,6 @@
                             <a href="/login" class="bi-person custom-icon me-3"></a>
                         <% } %>
                     </div>
-
                 </div>
             </div>
         </nav>
@@ -102,7 +88,6 @@
             <p>Feito por Ricardo Deutschendorf</p>
         </div>
     </footer>
-
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/bootstrap.bundle.min.js"></script>
     <script src="/javascripts/Headroom.js"></script>

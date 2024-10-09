@@ -51,7 +51,7 @@
           <ul id="comentarios-list" class="comentarios-list">
             <!-- Verifica se há comentários -->
             <% if (comentarios.length === 0) { %>
-              <li class="comentario-item">
+              <li class="comentario-item no-comments-message">
                 <p>Esse usuário ainda não tem comentários 😥</p>
               </li>
             <% } else { %>
@@ -79,7 +79,7 @@
   </section>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+       document.addEventListener('DOMContentLoaded', function () {
       // Mostrar formulário de edição de descrição ao clicar no botão "Alterar Descrição"
       const editarDescricaoBtn = document.getElementById('editar-descricao-btn');
       const descricaoForm = document.getElementById('descricao-form');
@@ -89,7 +89,7 @@
           editarDescricaoBtn.style.display = 'none';
         });
       }
-
+    
       // Atualizar descrição do perfil via AJAX
       if (descricaoForm) {
         descricaoForm.addEventListener('submit', function (event) {
@@ -97,12 +97,12 @@
           const descricaoTextarea = document.getElementById('descricao-textarea');
           const descricao = descricaoTextarea.value.trim();
           const usuarioId = descricaoForm.querySelector('input[name="usuarioId"]').value;
-
+    
           if (descricao === '') {
             alert('A descrição não pode estar vazia.');
             return;
           }
-
+    
           fetch(`/perfil/${usuarioId}/descricao`, {
             method: 'POST',
             headers: {
@@ -123,7 +123,7 @@
           .catch(error => console.error('Erro ao atualizar a descrição:', error));
         });
       }
-
+    
       // Adicionar comentário via AJAX
       const comentarioForm = document.getElementById('comentario-form');
       if (comentarioForm) {
@@ -135,7 +135,7 @@
             texto: formData.get('texto'),
             usuarioId: formData.get('usuarioId'),
           };
-
+    
           fetch('/comentarios/adicionar', {
             method: 'POST',
             headers: {
@@ -148,10 +148,15 @@
             if (data.error) {
               alert(data.error);
             } else {
+              const comentariosList = document.getElementById('comentarios-list');
+              const noCommentsMessage = comentariosList.querySelector('.no-comments-message');
+              if (noCommentsMessage) {
+                noCommentsMessage.remove();
+              }
               const comentarioItem = document.createElement('li');
               comentarioItem.classList.add('comentario-item');
               comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
-              document.getElementById('comentarios-list').appendChild(comentarioItem);
+              comentariosList.appendChild(comentarioItem);
               comentarioForm.reset();
             }
           })
