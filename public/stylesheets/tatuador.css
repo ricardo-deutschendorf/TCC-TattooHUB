@@ -124,7 +124,7 @@
     /* Remove padding padrão */
     margin: 0;
     /* Remove margem padrão */
-    max-height: 200px;
+    max-height: 100px;
     /* Define a altura máxima */
     overflow-y: auto;
     /* Adiciona barra de rolagem vertical */
@@ -445,3 +445,29 @@
 .enviar-comentario-btn:hover {
   background-color: #0056b3;
 }
+
+#imagens-container {
+    width: 100%; /* Largura total da seção de imagens */
+    max-width: 500px; /* Limita a largura máxima */
+    height: 200px; /* Altura fixa */
+    overflow-x: auto; /* Permite rolagem horizontal */
+    overflow-y: hidden; /* Oculta rolagem vertical */
+    white-space: nowrap; /* Mantém as imagens na mesma linha */
+    border: 1px solid #ddd; /* Borda ao redor da seção */
+    padding: 10px; /* Espaçamento interno */
+  }
+  
+  .imagens-tatuador {
+    display: inline-block; /* Exibe as imagens em linha */
+  }
+  
+  .imagens-tatuador img {
+    width: 150px; /* Largura da imagem */
+    height: 150px; /* Altura da imagem */
+    object-fit: cover; /* Ajusta a imagem para preencher o espaço */
+    margin-right: 10px; /* Espaço entre as imagens */
+    border-radius: 8px; /* Bordas arredondadas */
+    border: 2px solid #ddd; /* Borda ao redor das imagens */
+  }
+  
+  

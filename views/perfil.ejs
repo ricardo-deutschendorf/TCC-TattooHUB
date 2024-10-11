@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil do Tatuador</title>
   <link rel="stylesheet" href="/styles.css">
+  
 </head>
 
 <body>
@@ -54,12 +55,29 @@
         </div>
 
         <div id="upload-imagem-section">
-          <h5>Adicionar imagem</h5>
-          <form action="/foto/upload" method="post" enctype="multipart/form-data" id="upload-imagem-form">
-            <input type="file" name="imagem" />
-            <button type="submit">Enviar</button>
-          </form>
-        </div>
+          <h5>Imagens do Tatuador</h5>
+            
+            <!-- Exibir todas as imagens associadas ao usuário -->
+            <div id="imagens-container">
+              <div class="imagens-tatuador">
+                <% if (imagens && imagens.length > 0) { %>
+                  <% imagens.forEach(function(imagem) { %>
+                    <img src="/imagens/<%= imagem.imagen %>" alt="" class="imagem-perfil">
+                  <% }) %>
+                <% } else { %>
+                  <p>Esse usuário ainda não adicionou imagens.</p>
+                <% } %>
+              </div>
+            </div>
+          
+            <!-- Exibe o formulário apenas se o usuário logado for o dono da página -->
+            <% if (usuarioLogado.id === usuario.id) { %>
+              <form action="/foto/upload" method="post" enctype="multipart/form-data" id="upload-imagem-form">
+                <input type="file" name="imagem" />
+                <button type="submit">Enviar</button>
+              </form>
+            <% } %>
+          </div>
 
         <!-- Seção de comentários -->
         <div id="comments-section" class="comments-section">
