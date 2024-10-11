@@ -4,7 +4,7 @@ let enviaMensagens = () => {
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
   var mensagem = document.getElementById("mensagem").value;
-  xhr.send("mensagem=" + encodeURIComponent(mensagem));
+  xhr.send("mensagem=" + mensagem);
   xhr.onload = () => {
     let status = xhr.status;
     if (status == 200) {

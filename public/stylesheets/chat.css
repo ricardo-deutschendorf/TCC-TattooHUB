@@ -175,6 +175,7 @@ h4.card-title {
   background-color: #f5f6f7;
   font-weight: 100;
   color: #9b9b9b;
+  border: none; /* Adicione esta linha para remover a borda */
 }
 
 .media > * {
@@ -201,7 +202,6 @@ h4.card-title {
 .media-meta-day::after {
   content: "";
   flex: 1 1;
-  border-top: 1px solid #ebebeb;
 }
 
 .media-meta-day::before {
@@ -221,8 +221,9 @@ h4.card-title {
 .media-chat.media-chat-reverse .media-body p {
   float: right;
   clear: right;
-  background-color: #48b0f7;
+  background-color: #FF4400; /* Cor das mensagens enviadas */
   color: #fff;
+  border: none; /* Adicione esta linha para remover a borda */
 }
 
 .border-light {
@@ -293,12 +294,7 @@ textarea {
 /* Estilos para as mensagens */
 .message {
   display: flex;
-  align-items: flex-start;
   margin-bottom: 10px;
-}
-
-.message.received {
-  flex-direction: row; /* Mantém a direção padrão para mensagens recebidas */
 }
 
 .message.received .content {
@@ -308,7 +304,7 @@ textarea {
 }
 
 .message.sent .content {
-  background-color: #FF4400;
+  background-color: #FF4400; /* Cor das mensagens enviadas */
   color: white;
   margin-left: 10px;
 }
