@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil do Tatuador</title>
   <link rel="stylesheet" href="/styles.css">
-  
+
 </head>
 
 <body>
@@ -56,28 +56,28 @@
 
         <div id="upload-imagem-section">
           <h5>Imagens do Tatuador</h5>
-            
-            <!-- Exibir todas as imagens associadas ao usuário -->
-            <div id="imagens-container">
-              <div class="imagens-tatuador">
-                <% if (imagens && imagens.length > 0) { %>
-                  <% imagens.forEach(function(imagem) { %>
-                    <img src="/imagens/<%= imagem.imagen %>" alt="" class="imagem-perfil">
+
+          <!-- Exibir todas as imagens associadas ao usuário -->
+          <div id="imagens-container">
+            <div class="imagens-tatuador">
+              <% if (imagens && imagens.length> 0) { %>
+                <% imagens.forEach(function(imagem) { %>
+                  <img src="/imagens/<%= imagem.imagen %>" alt="" class="imagem-perfil">
                   <% }) %>
-                <% } else { %>
-                  <p>Esse usuário ainda não adicionou imagens.</p>
-                <% } %>
-              </div>
+                    <% } else { %>
+                      <p>Esse usuário ainda não adicionou imagens.</p>
+                      <% } %>
             </div>
-          
-            <!-- Exibe o formulário apenas se o usuário logado for o dono da página -->
-            <% if (usuarioLogado.id === usuario.id) { %>
-              <form action="/foto/upload" method="post" enctype="multipart/form-data" id="upload-imagem-form">
-                <input type="file" name="imagem" />
-                <button type="submit">Enviar</button>
-              </form>
-            <% } %>
           </div>
+
+          <!-- Exibe o formulário apenas se o usuário logado for o dono da página -->
+          <% if (usuarioLogado.id===usuario.id) { %>
+            <form action="/foto/upload" method="post" enctype="multipart/form-data" id="upload-imagem-form">
+              <input type="file" name="imagem" />
+              <button type="submit">Enviar</button>
+            </form>
+            <% } %>
+        </div>
 
         <!-- Seção de comentários -->
         <div id="comments-section" class="comments-section">
@@ -118,113 +118,113 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Mostrar formulário de edição de descrição ao clicar no botão "Alterar Descrição"
       const editarDescricaoBtn = document.getElementById('editar-descricao-btn');
       const descricaoForm = document.getElementById('descricao-form');
+      const commentsSection = document.getElementById('comments-section');
+      
       if (editarDescricaoBtn) {
         editarDescricaoBtn.addEventListener('click', function () {
           descricaoForm.style.display = 'block';
           editarDescricaoBtn.style.display = 'none';
+          commentsSection.style.display = 'none'; // Esconde a seção de comentários
         });
       }
-
-      // Atualizar descrição do perfil via AJAX
       if (descricaoForm) {
         descricaoForm.addEventListener('submit', function (event) {
           event.preventDefault();
           const descricaoTextarea = document.getElementById('descricao-textarea');
           const descricao = descricaoTextarea.value.trim();
           const usuarioId = descricaoForm.querySelector('input[name="usuarioId"]').value;
-
           if (descricao === '') {
             alert('A descrição não pode estar vazia.');
             return;
           }
-
-          fetch(`/perfil/${usuarioId}/descricao`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ descricao }),
-          })
-            .then(response => response.json())
-            .then(data => {
-              if (data.error) {
-                alert(data.error);
-              } else {
-                document.getElementById('descricao-texto').innerText = data.descricao;
-                descricaoForm.style.display = 'none';
-                editarDescricaoBtn.style.display = 'block';
-              }
-            })
-            .catch(error => console.error('Erro ao atualizar a descrição:', error));
-        });
-      }
-
-      // Adicionar comentário via AJAX
-      const comentarioForm = document.getElementById('comentario-form');
-      if (comentarioForm) {
-        comentarioForm.addEventListener('submit', function (event) {
-          event.preventDefault();
-          const formData = new FormData(comentarioForm);
-          const comentarioData = {
-            usuarioNome: formData.get('usuarioNome'),
-            texto: formData.get('texto'),
-            usuarioId: formData.get('usuarioId'),
-          };
-
-          fetch('/comentarios/adicionar', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(comentarioData),
-          })
-            .then(response => response.json())
-            .then(data => {
-              if (data.error) {
-                alert(data.error);
-              } else {
-                const comentariosList = document.getElementById('comentarios-list');
-                const noCommentsMessage = comentariosList.querySelector('.no-comments-message');
-                if (noCommentsMessage) {
-                  noCommentsMessage.remove();
-                }
-                const comentarioItem = document.createElement('li');
-                comentarioItem.classList.add('comentario-item');
-                comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
-                comentariosList.appendChild(comentarioItem);
-                comentarioForm.reset();
-              }
-            })
-            .catch(error => console.error('Erro ao adicionar o comentário:', error));
-        });
-      }
-      document.getElementById('upload-imagem-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const formData = new FormData(this); // Cria o FormData com o arquivo de imagem
-
-        fetch('/foto/upload', {
+        fetch(`/perfil/${usuarioId}/descricao`, {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ descricao }),
         })
           .then(response => response.json())
           .then(data => {
             if (data.error) {
               alert(data.error);
             } else {
-              alert('Imagem enviada com sucesso!');
-              // Atualiza a imagem na página sem recarregar
-              const imagemAtual = document.querySelector('.fotodolado');
-              imagemAtual.src = `/imagens/${data.imagem}`;
+              document.getElementById('descricao-texto').innerText = data.descricao;
+              descricaoForm.style.display = 'none';
+              editarDescricaoBtn.style.display = 'block';
+              commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
             }
           })
-          .catch(error => console.error('Erro no upload da imagem:', error));
+          .catch(error => console.error('Erro ao atualizar a descrição:', error));
       });
+    }
+    // Adicionar comentário via AJAX
+    const comentarioForm = document.getElementById('comentario-form');
+  if (comentarioForm) {
+    comentarioForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(comentarioForm);
+      const comentarioData = {
+        usuarioNome: formData.get('usuarioNome'),
+        texto: formData.get('texto'),
+        usuarioId: formData.get('usuarioId'),
+      };
+      fetch('/comentarios/adicionar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(comentarioData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            const comentariosList = document.getElementById('comentarios-list');
+            const noCommentsMessage = comentariosList.querySelector('.no-comments-message');
+            if (noCommentsMessage) {
+              noCommentsMessage.remove();
+            }
+            const comentarioItem = document.createElement('li');
+            comentarioItem.classList.add('comentario-item');
+            comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
+            comentariosList.appendChild(comentarioItem);
+            comentarioForm.reset();
+            commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
+          }
+        })
+        .catch(error => console.error('Erro ao adicionar o comentário:', error));
     });
-  </script>
+  }
+  // Upload de imagem via AJAX
+  const uploadImagemForm = document.getElementById('upload-imagem-form');
+  if (uploadImagemForm) {
+    uploadImagemForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+          const formData = new FormData(uploadImagemForm); // Cria o FormData com o arquivo de imagem
+          fetch('/foto/upload', {
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.error) {
+                alert(data.error);
+              } else {
+                alert('Imagem enviada com sucesso!');
+                // Atualiza a imagem na página sem recarregar
+                const imagemAtual = document.querySelector('.fotodolado');
+                imagemAtual.src = `/imagens/${data.imagem}`;
+              }
+            })
+            .catch(error => console.error('Erro no upload da imagem:', error));
+        });
+      }
+      });
+    </script>
 </body>
 
 </html>

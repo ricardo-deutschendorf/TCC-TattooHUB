@@ -23,6 +23,7 @@
     /* Centraliza o texto */
 }
 
+
 .nome-artistico {
     font-size: 36px;
     /* Tamanho da fonte */
@@ -96,7 +97,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Estilos para o botão de enviar descrição */
@@ -448,7 +449,7 @@
 
 #imagens-container {
     width: 100%; /* Largura total da seção de imagens */
-    max-width: 500px; /* Limita a largura máxima */
+    max-width: 700px; /* Limita a largura máxima */
     height: 200px; /* Altura fixa */
     overflow-x: auto; /* Permite rolagem horizontal */
     overflow-y: hidden; /* Oculta rolagem vertical */
@@ -469,5 +470,4 @@
     border-radius: 8px; /* Bordas arredondadas */
     border: 2px solid #ddd; /* Borda ao redor das imagens */
   }
-  
   

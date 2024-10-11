@@ -22,6 +22,7 @@
               <%= descricao ? descricao : "Esse usuário ainda não tem descrição 😥" %>
             </h4> <!-- Descrição do tatuador -->
           </div>
+          <!-- Adicione esta seção para as imagens -->
         </div>
       </div>
       <!--informações do usuario-->
@@ -35,7 +36,6 @@
             style="overflow-y: scroll !important; height: 690px !important">
             <!-- As mensagens serão carregadas aqui -->
           </div>
-
           <form action="javascript:enviaMensagens()">
             <div class="publisher bt-1 border-light chat-input-container">
               <% if (imagem) { %>
@@ -50,10 +50,8 @@
                 <img src="/imagens/userDefault.png" alt="Foto de perfil"
                   class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
               <% } %>
-
               <input class="publisher-input chat-input textolinha" type="text"
                 placeholder="Escreva uma mensagem" id="mensagem" />
-
               <input type="submit" class="botaomaluco"></input>
             </div>
           </form>
@@ -63,5 +61,4 @@
     </div>
   </div>
 </div>
-
 <script type="text/javascript" src="/javascripts/chat.js"></script>

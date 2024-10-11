@@ -48,4 +48,29 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+// Rota para atualizar a descrição do perfil
+router.post('/:id/descricao', async (req, res, next) => {
+  const id = parseInt(req.params.id, 10); // Ensure id is an integer
+  const { descricao } = req.body;
+
+  if (req.session.usuario.id !== id) {
+    return res.status(403).json({ error: 'Acesso negado' });
+  }
+
+  try {
+    const tatuador = await Usuario.findByPk(id);
+    if (!tatuador) {
+      return res.status(404).json({ error: 'Tatuador não encontrado' });
+    }
+
+    // Atualize a descrição e salve a instância
+    await Usuario.update({ descricao }, { where: { id } });
+
+    res.json({ descricao });
+  } catch (err) {
+    console.error('Erro ao atualizar a descrição:', err);
+    res.status(500).json({ error: 'Erro ao atualizar a descrição' });
+  }
+});
+
 module.exports = router;
