@@ -27,6 +27,8 @@ html, body {
   padding: 20px;
   box-sizing: border-box;
   background-color: #fff;
+  display: flex; /* Adicione esta linha */
+  flex-direction: column; /* Adicione esta linha */
 }
 
 .chat-container {
@@ -289,7 +291,6 @@ textarea {
 }
 
 /* Estilos para as mensagens */
-/* Estilos para as mensagens */
 .message {
   display: flex;
   align-items: flex-start;
@@ -319,7 +320,6 @@ textarea {
   word-wrap: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
   word-break: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
 }
-
 
 .message .profile-pic {
   width: 30px;
@@ -386,4 +386,13 @@ textarea {
     margin: 10px;
     width: 100%;
   }
+}
+
+.imagens-tatuador {
+  position: relative;
+  overflow: visible; /* Permite que a imagem aumentada ultrapasse os limites do contêiner */
+}
+
+.imagem-perfil {
+  transition: transform 0.3s ease, z-index 0.3s ease; /* Adiciona uma transição suave */
 }

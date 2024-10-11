@@ -22,7 +22,17 @@
               <%= descricao ? descricao : "Esse usuário ainda não tem descrição 😥" %>
             </h4> <!-- Descrição do tatuador -->
           </div>
-          <!-- Adicione esta seção para as imagens -->
+          <div id="imagens-container">
+            <div class="imagens-tatuador">
+              <% if (imagens && imagens.length> 0) { %>
+                <% imagens.forEach(function(imagem) { %>
+                  <img src="/imagens/<%= imagem.imagen %>" alt="" class="imagem-perfil">
+                  <% }) %>
+                    <% } else { %>
+                      <p>Esse usuário ainda não adicionou imagens.</p>
+                      <% } %>
+            </div>
+          </div>
         </div>
       </div>
       <!--informações do usuario-->
@@ -39,20 +49,20 @@
           <form action="javascript:enviaMensagens()">
             <div class="publisher bt-1 border-light chat-input-container">
               <% if (imagem) { %>
-                <% if (imagem.search("https") === -1) { %>
+                <% if (imagem.search("https")===-1) { %>
                   <img src="/imagens/<%= usuario.imagem %>" alt="Foto de perfil"
                     class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
-                <% } else { %>
-                  <img src="<%= imagem %>" alt="Foto de perfil"
-                    class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
-                <% } %>
-              <% } else { %>
-                <img src="/imagens/userDefault.png" alt="Foto de perfil"
-                  class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
-              <% } %>
-              <input class="publisher-input chat-input textolinha" type="text"
-                placeholder="Escreva uma mensagem" id="mensagem" />
-              <input type="submit" class="botaomaluco"></input>
+                  <% } else { %>
+                    <img src="<%= imagem %>" alt="Foto de perfil"
+                      class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
+                    <% } %>
+                      <% } else { %>
+                        <img src="/imagens/userDefault.png" alt="Foto de perfil"
+                          class="w-10 h-10 rounded-full chat-profile-pic imgdaora" />
+                        <% } %>
+                          <input class="publisher-input chat-input textolinha" type="text"
+                            placeholder="Escreva uma mensagem" id="mensagem" />
+                          <input type="submit" class="botaomaluco"></input>
             </div>
           </form>
         </div>
@@ -62,3 +72,29 @@
   </div>
 </div>
 <script type="text/javascript" src="/javascripts/chat.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const imagens = document.querySelectorAll('.imagem-perfil');
+
+    imagens.forEach(function (imagem) {
+      imagem.addEventListener('mouseover', function () {
+        this.style.transform = 'scale(1.5)';
+        this.style.transition = 'transform 0.3s ease';
+        this.style.zIndex = '10'; // Adiciona um z-index maior
+      });
+
+      imagem.addEventListener('mouseout', function () {
+        this.style.transform = 'scale(1)';
+        this.style.zIndex = '1'; // Restaura o z-index original
+      });
+    });
+
+    if (editarDescricaoBtn) {
+      editarDescricaoBtn.addEventListener('click', function () {
+        descricaoForm.style.display = 'block';
+        editarDescricaoBtn.style.display = 'none';
+        commentsSection.style.display = 'none'; // Esconde a seção de comentários
+      });
+    }
+  });
+</script>

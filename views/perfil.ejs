@@ -122,6 +122,29 @@
       const descricaoForm = document.getElementById('descricao-form');
       const commentsSection = document.getElementById('comments-section');
       
+      const imagens = document.querySelectorAll('.imagem-perfil');
+
+    imagens.forEach(function(imagem) {
+      imagem.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.5)';
+        this.style.transition = 'transform 0.3s ease';
+        this.style.zIndex = '10'; // Adiciona um z-index maior
+      });
+
+      imagem.addEventListener('mouseout', function() {
+        this.style.transform = 'scale(1)';
+        this.style.zIndex = '1'; // Restaura o z-index original
+      });
+    });
+
+    if (editarDescricaoBtn) {
+      editarDescricaoBtn.addEventListener('click', function () {
+        descricaoForm.style.display = 'block';
+        editarDescricaoBtn.style.display = 'none';
+        commentsSection.style.display = 'none'; // Esconde a seção de comentários
+      });
+    }
+
       if (editarDescricaoBtn) {
         editarDescricaoBtn.addEventListener('click', function () {
           descricaoForm.style.display = 'block';

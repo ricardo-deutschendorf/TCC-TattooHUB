@@ -470,4 +470,13 @@
     border-radius: 8px; /* Bordas arredondadas */
     border: 2px solid #ddd; /* Borda ao redor das imagens */
   }
+
+  .imagens-tatuador {
+    position: relative;
+    overflow: visible; /* Permite que a imagem aumentada ultrapasse os limites do contêiner */
+  }
+  
+  .imagem-perfil {
+    transition: transform 0.3s ease, z-index 0.3s ease; /* Adiciona uma transição suave */
+  }
   
