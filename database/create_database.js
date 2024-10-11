@@ -1,4 +1,3 @@
-// create_database.js
 var mysql = require("mysql");
 var con = mysql.createConnection({
   host: "localhost",
@@ -25,7 +24,7 @@ con.connect(function (err) {
       if (err) throw err;
 
       // Criar tabela Comentarios
-      var createTableSql = `
+      var createComentariosTableSql = `
         CREATE TABLE IF NOT EXISTS Comentarios (
           id INT AUTO_INCREMENT PRIMARY KEY,
           usuarioId INT NOT NULL,
@@ -35,10 +34,26 @@ con.connect(function (err) {
           FOREIGN KEY (usuarioId) REFERENCES Usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
         )
       `;
-      con.query(createTableSql, function (err, result) {
+      con.query(createComentariosTableSql, function (err, result) {
         if (err) throw err;
         console.log("Tabela Comentarios criada");
-        con.end();
+
+        // Criar tabela Imagem
+        var createImagemTableSql = `
+        CREATE TABLE IF NOT EXISTS Imagem (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          usuario_id INT NOT NULL,
+          imagen BLOB NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+          FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
+        )
+      `;
+        con.query(createImagemTableSql, function (err, result) {
+          if (err) throw err;
+          console.log("Tabela Imagem criada");
+          con.end();
+        });
       });
     });
   });

@@ -19,6 +19,7 @@ var chatRouter = require('./routes/chat');
 var chatAtivoRouter = require('./routes/chatAtivo'); // Adicionando a nova rota
 var perfilRouter = require('./routes/perfil');
 var comentariosRouter = require('./routes/comentarios'); // Ajuste o caminho conforme necessário
+var fotoRouter = require('./routes/foto');
 
 // Inicializa o aplicativo Express
 var app = express();
@@ -86,6 +87,7 @@ app.use('/chat', authenticationMiddleware, chatRouter);
 app.use('/chatAtivo', authenticationMiddleware, chatAtivoRouter); // Adicionando a nova rota
 app.use('/perfil', authenticationMiddleware, perfilRouter);
 app.use('/comentarios', authenticationMiddleware, comentariosRouter); // Ajuste o caminho conforme necessário
+app.use('/foto', authenticationMiddleware, fotoRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
