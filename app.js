@@ -16,19 +16,20 @@ var loginRouter = require('./routes/login');
 var tatuadorRouter = require('./routes/tatuador');
 var logoutRouter = require('./routes/logout');
 var chatRouter = require('./routes/chat');
-var chatAtivoRouter = require('./routes/chatAtivo'); // Adicionando a nova rota
+var chatAtivoRouter = require('./routes/chatAtivo');
 var perfilRouter = require('./routes/perfil');
-var comentariosRouter = require('./routes/comentarios'); // Ajuste o caminho conforme necessário
+var apagarRouter = require('./routes/apagar'); // Importação da rota apagar
+var comentariosRouter = require('./routes/comentarios');
 var fotoRouter = require('./routes/foto');
+const { isAuthenticated } = require('./auth'); // Importação da função isAuthenticated
 
-// Inicializa o aplicativo Express
 var app = express();
 
 require('./auth')(passport);
 
 require('./models/Usuario');
 require('./models/Chat');
-require('./models/comentarios'); // Ajuste o caminho conforme necessário
+require('./models/comentarios');
 require('./models/associations');
 
 app.set("views", path.join(__dirname, "views"));
@@ -51,7 +52,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// Middleware to set res.locals.usuario
 app.use((req, res, next) => {
   res.locals.usuario = req.session.usuario;
   next();
@@ -73,9 +73,6 @@ function authenticationMiddleware(req, res, next) {
 }
 
 // Rotas
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/cadastro', cadastroRouter);
@@ -84,9 +81,10 @@ app.use('/logout', logoutRouter);
 app.use('/tatuadores', tatuadorRouter); // Adiciona a rota /tatuadores sem autenticação
 app.use('/tatuador', authenticationMiddleware, tatuadorRouter);
 app.use('/chat', authenticationMiddleware, chatRouter);
-app.use('/chatAtivo', authenticationMiddleware, chatAtivoRouter); // Adicionando a nova rota
+app.use('/chatAtivo', authenticationMiddleware, chatAtivoRouter);
+app.use('/apagar', authenticationMiddleware, apagarRouter); // Configuração da rota apagar
 app.use('/perfil', authenticationMiddleware, perfilRouter);
-app.use('/comentarios', authenticationMiddleware, comentariosRouter); // Ajuste o caminho conforme necessário
+app.use('/comentarios', authenticationMiddleware, comentariosRouter);
 app.use('/foto', authenticationMiddleware, fotoRouter);
 
 app.use(function(req, res, next) {

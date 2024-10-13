@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil do Tatuador</title>
   <link rel="stylesheet" href="/styles.css">
-
 </head>
 
 <body>
@@ -35,23 +34,23 @@
           <h5>Descrição</h5>
           <div id="descricao-texto" class="descricao-texto">
             <% if (!usuario.descricao) { %>
-              <% if (usuario.tipo==='cliente' ) { %>
+              <% if (usuario.tipo === 'cliente') { %>
                 <p>Você é um cliente! 😉</p>
-                <% } else { %>
-                  <p>Esse usuário ainda não tem uma descrição 😥</p>
-                  <% } %>
-                    <% } else { %>
-                      <%= usuario.descricao %>
-                        <% } %>
+              <% } else { %>
+                <p>Esse usuário ainda não tem uma descrição 😥</p>
+              <% } %>
+            <% } else { %>
+              <%= usuario.descricao %>
+            <% } %>
           </div>
-          <% if (usuarioLogado.id===usuario.id) { %>
+          <% if (usuarioLogado.id === usuario.id) { %>
             <button id="editar-descricao-btn" class="alterar-descricao-btn">Alterar Descrição</button>
             <form id="descricao-form" style="display: none;">
               <textarea id="descricao-textarea" name="descricao" placeholder="Atualize sua descrição"></textarea>
               <input type="hidden" name="usuarioId" value="<%= usuario.id %>">
               <button type="submit" class="alterar-descricao-btn">Alterar Descrição</button>
             </form>
-            <% } %>
+          <% } %>
         </div>
 
         <div id="upload-imagem-section">
@@ -60,23 +59,23 @@
           <!-- Exibir todas as imagens associadas ao usuário -->
           <div id="imagens-container">
             <div class="imagens-tatuador">
-              <% if (imagens && imagens.length> 0) { %>
+              <% if (imagens && imagens.length > 0) { %>
                 <% imagens.forEach(function(imagem) { %>
                   <img src="/imagens/<%= imagem.imagen %>" alt="" class="imagem-perfil">
-                  <% }) %>
-                    <% } else { %>
-                      <p>Esse usuário ainda não adicionou imagens.</p>
-                      <% } %>
+                <% }) %>
+              <% } else { %>
+                <p id="no-images-message">Esse usuário ainda não adicionou imagens.</p>
+              <% } %>
             </div>
           </div>
 
           <!-- Exibe o formulário apenas se o usuário logado for o dono da página -->
-          <% if (usuarioLogado.id===usuario.id) { %>
+          <% if (usuarioLogado.id === usuario.id) { %>
             <form action="/foto/upload" method="post" enctype="multipart/form-data" id="upload-imagem-form">
               <input type="file" name="imagem" />
               <button type="submit">Enviar</button>
             </form>
-            <% } %>
+          <% } %>
         </div>
 
         <!-- Seção de comentários -->
@@ -84,25 +83,25 @@
           <h5>Comentários</h5>
           <ul id="comentarios-list" class="comentarios-list">
             <!-- Verifica se há comentários -->
-            <% if (comentarios.length===0) { %>
+            <% if (comentarios.length === 0) { %>
               <li class="comentario-item no-comments-message">
                 <p>Esse usuário ainda não tem comentários 😥</p>
               </li>
-              <% } else { %>
-                <!-- Itera sobre a lista de comentários e exibe cada um -->
-                <% comentarios.forEach(function(comentario) { %>
-                  <li class="comentario-item">
-                    <strong>
-                      <%= comentario.usuarioNome %>:
-                    </strong>
-                    <p>
-                      <%= comentario.texto %>
-                    </p>
-                  </li>
-                  <% }); %>
-                    <% } %>
+            <% } else { %>
+              <!-- Itera sobre a lista de comentários e exibe cada um -->
+              <% comentarios.forEach(function(comentario) { %>
+                <li class="comentario-item">
+                  <strong>
+                    <%= comentario.usuarioNome %>:
+                  </strong>
+                  <p>
+                    <%= comentario.texto %>
+                  </p>
+                </li>
+              <% }); %>
+            <% } %>
           </ul>
-          <% if (usuarioLogado.id !==usuario.id) { %>
+          <% if (usuarioLogado.id !== usuario.id) { %>
             <!-- Formulário para adicionar um novo comentário -->
             <form id="comentario-form" class="comentario-form">
               <textarea name="texto" placeholder="Adicione um comentário"></textarea>
@@ -110,7 +109,7 @@
               <input type="hidden" name="usuarioId" value="<%= usuario.id %>"> <!-- ID do tatuador -->
               <button type="submit" class="alterar-descricao-btn">Enviar</button>
             </form>
-            <% } %>
+          <% } %>
         </div>
       </div>
     </div>
@@ -124,26 +123,18 @@
       
       const imagens = document.querySelectorAll('.imagem-perfil');
 
-    imagens.forEach(function(imagem) {
-      imagem.addEventListener('mouseover', function() {
-        this.style.transform = 'scale(1.5)';
-        this.style.transition = 'transform 0.3s ease';
-        this.style.zIndex = '10'; // Adiciona um z-index maior
-      });
+      imagens.forEach(function(imagem) {
+        imagem.addEventListener('mouseover', function() {
+          this.style.transform = 'scale(1.5)';
+          this.style.transition = 'transform 0.3s ease';
+          this.style.zIndex = '10'; // Adiciona um z-index maior
+        });
 
-      imagem.addEventListener('mouseout', function() {
-        this.style.transform = 'scale(1)';
-        this.style.zIndex = '1'; // Restaura o z-index original
+        imagem.addEventListener('mouseout', function() {
+          this.style.transform = 'scale(1)';
+          this.style.zIndex = '1'; // Restaura o z-index original
+        });
       });
-    });
-
-    if (editarDescricaoBtn) {
-      editarDescricaoBtn.addEventListener('click', function () {
-        descricaoForm.style.display = 'block';
-        editarDescricaoBtn.style.display = 'none';
-        commentsSection.style.display = 'none'; // Esconde a seção de comentários
-      });
-    }
 
       if (editarDescricaoBtn) {
         editarDescricaoBtn.addEventListener('click', function () {
@@ -152,6 +143,7 @@
           commentsSection.style.display = 'none'; // Esconde a seção de comentários
         });
       }
+
       if (descricaoForm) {
         descricaoForm.addEventListener('submit', function (event) {
           event.preventDefault();
@@ -162,71 +154,74 @@
             alert('A descrição não pode estar vazia.');
             return;
           }
-        fetch(`/perfil/${usuarioId}/descricao`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ descricao }),
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.error) {
-              alert(data.error);
-            } else {
-              document.getElementById('descricao-texto').innerText = data.descricao;
-              descricaoForm.style.display = 'none';
-              editarDescricaoBtn.style.display = 'block';
-              commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
-            }
+          fetch(`/perfil/${usuarioId}/descricao`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ descricao }),
           })
-          .catch(error => console.error('Erro ao atualizar a descrição:', error));
-      });
-    }
-    // Adicionar comentário via AJAX
-    const comentarioForm = document.getElementById('comentario-form');
-  if (comentarioForm) {
-    comentarioForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const formData = new FormData(comentarioForm);
-      const comentarioData = {
-        usuarioNome: formData.get('usuarioNome'),
-        texto: formData.get('texto'),
-        usuarioId: formData.get('usuarioId'),
-      };
-      fetch('/comentarios/adicionar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(comentarioData),
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            const comentariosList = document.getElementById('comentarios-list');
-            const noCommentsMessage = comentariosList.querySelector('.no-comments-message');
-            if (noCommentsMessage) {
-              noCommentsMessage.remove();
-            }
-            const comentarioItem = document.createElement('li');
-            comentarioItem.classList.add('comentario-item');
-            comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
-            comentariosList.appendChild(comentarioItem);
-            comentarioForm.reset();
-            commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
-          }
-        })
-        .catch(error => console.error('Erro ao adicionar o comentário:', error));
-    });
-  }
-  // Upload de imagem via AJAX
-  const uploadImagemForm = document.getElementById('upload-imagem-form');
-  if (uploadImagemForm) {
-    uploadImagemForm.addEventListener('submit', function (event) {
-      event.preventDefault();
+            .then(response => response.json())
+            .then(data => {
+              if (data.error) {
+                alert(data.error);
+              } else {
+                document.getElementById('descricao-texto').innerText = data.descricao;
+                descricaoForm.style.display = 'none';
+                editarDescricaoBtn.style.display = 'block';
+                commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
+              }
+            })
+            .catch(error => console.error('Erro ao atualizar a descrição:', error));
+        });
+      }
+
+      // Adicionar comentário via AJAX
+      const comentarioForm = document.getElementById('comentario-form');
+      if (comentarioForm) {
+        comentarioForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const formData = new FormData(comentarioForm);
+          const comentarioData = {
+            usuarioNome: formData.get('usuarioNome'),
+            texto: formData.get('texto'),
+            usuarioId: formData.get('usuarioId'),
+          };
+          fetch('/comentarios/adicionar', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(comentarioData),
+          })
+            .then(response => response.json())
+            .then(data => {
+              if (data.error) {
+                alert(data.error);
+              } else {
+                const comentariosList = document.getElementById('comentarios-list');
+                const noCommentsMessage = comentariosList.querySelector('.no-comments-message');
+                if (noCommentsMessage) {
+                  noCommentsMessage.remove();
+                }
+                const comentarioItem = document.createElement('li');
+                comentarioItem.classList.add('comentario-item');
+                comentarioItem.innerHTML = `<strong>${data.usuarioNome}:</strong><p>${data.texto}</p>`;
+                comentariosList.appendChild(comentarioItem);
+                comentarioForm.reset();
+                commentsSection.style.display = 'block'; // Exibe a seção de comentários novamente
+              }
+            })
+            .catch(error => console.error('Erro ao adicionar o comentário:', error));
+        });
+      }
+
+      // Upload de imagem via AJAX
+
+      const uploadImagemForm = document.getElementById('upload-imagem-form');
+      if (uploadImagemForm) {
+        uploadImagemForm.addEventListener('submit', function (event) {
+          event.preventDefault();
           const formData = new FormData(uploadImagemForm); // Cria o FormData com o arquivo de imagem
           fetch('/foto/upload', {
             method: 'POST',
@@ -237,17 +232,36 @@
               if (data.error) {
                 alert(data.error);
               } else {
-                alert('Imagem enviada com sucesso!');
-                // Atualiza a imagem na página sem recarregar
-                const imagemAtual = document.querySelector('.fotodolado');
-                imagemAtual.src = `/imagens/${data.imagem}`;
+                // Atualiza a lista de imagens na página sem recarregar
+                const imagensContainer = document.querySelector('.imagens-tatuador');
+                const noImagesMessage = document.getElementById('no-images-message');
+                if (noImagesMessage) {
+                  noImagesMessage.remove();
+                }
+                const novaImagem = document.createElement('img');
+                novaImagem.src = `/imagens/${data.imagen}`;
+                novaImagem.alt = '';
+                novaImagem.classList.add('imagem-perfil');
+                imagensContainer.appendChild(novaImagem);
+      
+                // Adiciona os eventos de mouseover e mouseout à nova imagem
+                novaImagem.addEventListener('mouseover', function() {
+                  this.style.transform = 'scale(1.5)';
+                  this.style.transition = 'transform 0.3s ease';
+                  this.style.zIndex = '10'; // Adiciona um z-index maior
+                });
+      
+                novaImagem.addEventListener('mouseout', function() {
+                  this.style.transform = 'scale(1)';
+                  this.style.zIndex = '1'; // Restaura o z-index original
+                });
               }
             })
             .catch(error => console.error('Erro no upload da imagem:', error));
         });
       }
-      });
-    </script>
+    });
+  </script>
 </body>
 
 </html>
