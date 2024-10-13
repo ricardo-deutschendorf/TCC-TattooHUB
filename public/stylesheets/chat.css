@@ -157,6 +157,7 @@ h4.card-title {
   background-color: #f5f6f7;
   color: #8b95a5;
   text-transform: uppercase;
+  border-radius: 50%; /* Deixa a imagem do avatar redonda */
 }
 
 .media-chat .media-body {
@@ -170,12 +171,13 @@ h4.card-title {
 
 .media-chat .media-body p {
   position: relative;
-  padding: 6px 8px;
+  padding: 10px 15px; /* Aumenta o padding para maior tamanho vertical */
   margin: 4px 0;
   background-color: #f5f6f7;
   font-weight: 100;
   color: #9b9b9b;
   border: none; /* Adicione esta linha para remover a borda */
+  border-radius: 15px; /* Deixa as mensagens mais arredondadas */
 }
 
 .media > * {
@@ -224,6 +226,7 @@ h4.card-title {
   background-color: #FF4400; /* Cor das mensagens enviadas */
   color: #fff;
   border: none; /* Adicione esta linha para remover a borda */
+  border-radius: 15px; /* Deixa as mensagens mais arredondadas */
 }
 
 .border-light {
@@ -301,17 +304,21 @@ textarea {
   background-color: #f1f1f1;
   color: #333;
   margin-right: 10px;
+  border-radius: 15px; /* Deixa as mensagens mais arredondadas */
+  padding: 15px; /* Aumenta o padding para maior tamanho vertical */
 }
 
 .message.sent .content {
   background-color: #FF4400; /* Cor das mensagens enviadas */
   color: white;
   margin-left: 10px;
+  border-radius: 15px; /* Deixa as mensagens mais arredondadas */
+  padding: 15px; /* Aumenta o padding para maior tamanho vertical */
 }
 
 .message .content {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 15px; /* Aumenta o padding para maior tamanho vertical */
+  border-radius: 15px; /* Deixa as mensagens mais arredondadas */
   max-width: 60%; /* Limita a largura máxima da mensagem */
   word-wrap: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
   word-break: break-word; /* Garante que o texto quebre a linha antes de sair do contêiner */
@@ -341,6 +348,7 @@ textarea {
   height: 60px;
   object-fit: cover;
   margin-bottom: 0;
+  border-radius: 50%; /* Deixa a imagem do usuário redonda */
 }
 
 .user-details {
@@ -391,4 +399,5 @@ textarea {
 
 .imagem-perfil {
   transition: transform 0.3s ease, z-index 0.3s ease; /* Adiciona uma transição suave */
+  border-radius: 15px; /* Deixa as imagens mais arredondadas */
 }
